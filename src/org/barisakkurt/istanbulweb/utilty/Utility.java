@@ -19,7 +19,7 @@ public class Utility extends Activity {
 		return true;
 	}
 
-	public static boolean validate(final String hex) {
+	public static boolean validateEmail(final String hex) {
 		final String EMAIL_PATTERN = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
 				+ "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
 
