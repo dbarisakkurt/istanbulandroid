@@ -296,6 +296,7 @@ containing a value of this type.
          */
         public static final int auth_client_using_bad_version_title=0x7f060014;
         public static final int back=0x7f06002a;
+        public static final int baris=0x7f06002f;
         public static final int category=0x7f06002d;
         /**  Button in confirmation dialog to enable Google Play services.  Clicking it
         will direct user to application settings of Google Play services where they
@@ -379,11 +380,12 @@ containing a value of this type.
         public static final int register=0x7f06001e;
         public static final int send=0x7f060026;
         public static final int showNearest=0x7f060029;
-        public static final int title_activity_about=0x7f06002f;
+        public static final int title_activity_about=0x7f060031;
         public static final int title_activity_base=0x7f06001c;
         public static final int title_activity_login=0x7f060020;
-        public static final int title_activity_new_report=0x7f060030;
-        public static final int title_activity_problems=0x7f06002e;
+        public static final int title_activity_new_report=0x7f060032;
+        public static final int title_activity_problems=0x7f060030;
+        public static final int tugay=0x7f06002e;
         public static final int username=0x7f060022;
     }
     public static final class style {

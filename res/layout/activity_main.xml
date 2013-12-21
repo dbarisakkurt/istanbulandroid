@@ -25,7 +25,7 @@
         android:id="@+id/buttonRegister"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:onClick="openRegisterActivity"
+        android:onClick="openRegisterPage"
         android:text="@string/register" />
 
     <Button

@@ -118,6 +118,7 @@ int string auth_client_play_services_err_notification_msg 0x7f060018
 int string auth_client_requested_by_msg 0x7f060019
 int string auth_client_using_bad_version_title 0x7f060014
 int string back 0x7f06002a
+int string baris 0x7f06002f
 int string category 0x7f06002d
 int string common_google_play_services_enable_button 0x7f060006
 int string common_google_play_services_enable_text 0x7f060005
@@ -150,11 +151,12 @@ int string password 0x7f060023
 int string register 0x7f06001e
 int string send 0x7f060026
 int string showNearest 0x7f060029
-int string title_activity_about 0x7f06002f
+int string title_activity_about 0x7f060031
 int string title_activity_base 0x7f06001c
 int string title_activity_login 0x7f060020
-int string title_activity_new_report 0x7f060030
-int string title_activity_problems 0x7f06002e
+int string title_activity_new_report 0x7f060032
+int string title_activity_problems 0x7f060030
+int string tugay 0x7f06002e
 int string username 0x7f060022
 int style AppBaseTheme 0x7f090001
 int style AppTheme 0x7f090002

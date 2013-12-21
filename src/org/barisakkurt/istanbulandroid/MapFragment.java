@@ -17,12 +17,15 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.utils.URLEncodedUtils;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
+import org.barisakkurt.istanbulweb.utilty.Utility;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -34,6 +37,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
@@ -46,6 +50,7 @@ public class MapFragment extends Fragment {
 	
 	// Progress Dialog
 	private ProgressDialog pDialog;
+	private String serverUrl = "http://web.itu.edu.tr/ilbay/istanbulweb/";
 	private String urlAllProblems = "http://web.itu.edu.tr/ilbay/istanbulweb/loadBasicProblems.php";
 	private static final String TAG_LATITUDE = "latitude";
 	private static final String TAG_LONGITUDE = "longitude";
@@ -158,7 +163,9 @@ public class MapFragment extends Fragment {
 						
 						Problem tempProblem=new Problem(latitude, longitude, reportDate);
 						tempProblem.setCategory(category);
-						tempProblem.setReportDate(reportDate);
+						tempProblem.setDescription(description);
+						
+						//tempProblem.setImagePath(photo);
 						pList.add(tempProblem);
 					}
 				} else {
@@ -181,13 +188,22 @@ public class MapFragment extends Fragment {
 	}
 	
 	private void addMarkersToMap() {
+
 		for(int i=0; i<probList.size(); i++) {
 			double d1=Double.parseDouble(probList.get(i).getLatitude());
 			double d2=Double.parseDouble(probList.get(i).getLongitude());
 			String title="Sorun";
 			String body=probList.get(i).getDescription();
+			//String url = serverUrl;
+			//url+=probList.get(i).getImagePath();
+					
+	        /*BitmapFactory.Options bmOptions;
+	        bmOptions = new BitmapFactory.Options();
+	        bmOptions.inSampleSize = 1;*/
+	        //Bitmap bm = Utility.loadBitmap(url, bmOptions);
 			
 			googleMap.addMarker(new MarkerOptions().position(new LatLng(d1, d2)).title("bar").snippet("snippet"));
+					//.icon(BitmapDescriptorFactory.fromBitmap(bm)));
 		}
 		
 	}

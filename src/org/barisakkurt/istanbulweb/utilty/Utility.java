@@ -1,9 +1,16 @@
 package org.barisakkurt.istanbulweb.utilty;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import android.app.Activity;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 
 public class Utility extends Activity {
 
@@ -19,6 +26,7 @@ public class Utility extends Activity {
 		return true;
 	}
 
+	//returns true if it is a valid email address
 	public static boolean validateEmail(final String hex) {
 		final String EMAIL_PATTERN = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
 				+ "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
@@ -27,5 +35,36 @@ public class Utility extends Activity {
 		Matcher matcher = pattern.matcher(hex);
 		return matcher.matches();
 	}
+	
+	public static Bitmap loadBitmap(String URL, BitmapFactory.Options options) {
+        Bitmap bitmap = null;
+        InputStream in = null;
+        try {
+            in = OpenHttpConnection(URL);
+            bitmap = BitmapFactory.decodeStream(in, null, options);
+            in.close();
+        } catch (IOException e1) {
+        }
+        return bitmap;
+    }
+	
+	private static InputStream OpenHttpConnection(String strURL)
+            throws IOException {
+        InputStream inputStream = null;
+        URL url = new URL(strURL);
+        URLConnection conn = url.openConnection();
+
+        try {
+            HttpURLConnection httpConn = (HttpURLConnection) conn;
+            httpConn.setRequestMethod("GET");
+            httpConn.connect();
+
+            if (httpConn.getResponseCode() == HttpURLConnection.HTTP_OK) {
+                inputStream = httpConn.getInputStream();
+            }
+        } catch (Exception ex) {
+        }
+        return inputStream;
+    }
 
 }

@@ -7,10 +7,19 @@ class Problem {
 	private String reportDate;
 	private String category;
 	private String description;
+	private String imagePath;
 	
 	
 	
 	
+	public String getImagePath() {
+		return imagePath;
+	}
+
+	public void setImagePath(String imagePath) {
+		this.imagePath = imagePath;
+	}
+
 	public Problem(String latitude, String longitude, String reportDate) {
 		super();
 		this.latitude = latitude;

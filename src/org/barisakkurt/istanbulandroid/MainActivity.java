@@ -1,6 +1,7 @@
 package org.barisakkurt.istanbulandroid;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
@@ -23,6 +24,12 @@ public class MainActivity extends BaseActivity {
 	    else {
 	    	Toast.makeText(getApplicationContext(), "Bu uygulamayý kullanabilmek için internet baðlantýsý gerekiyor.", Toast.LENGTH_SHORT).show();
 	    }
+	}
+	
+	public void openRegisterPage(View v) {
+		String url="http://web.itu.edu.tr/ilbay/istanbulweb/signup.php";
+		Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+		startActivity(browserIntent);
 	}
 	
 	public void openAboutActivity(View v) {

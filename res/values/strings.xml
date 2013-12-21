@@ -21,6 +21,8 @@
     <string name="description">Açıklama</string>
     <string name="address">Adres</string>
     <string name="category">Kategori</string>
+    <string name="tugay">Tugay İlbay</string>
+    <string name="baris">Barış Akkurt</string>
     <string name="title_activity_problems">ProblemsActivity</string>
 
     <!-- from dibbus blog -->
