@@ -12,7 +12,7 @@ public class GamesFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
  
-        View rootView = inflater.inflate(R.layout.fragment_games, container, false);
+        View rootView = inflater.inflate(R.layout.list_tab, container, false);
          
         return rootView;
     }

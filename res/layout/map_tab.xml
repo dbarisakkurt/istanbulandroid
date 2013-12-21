@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:id="@+id/base">
+    
+    
+    <LinearLayout
+        android:id="@+id/linearLayout1"
+        android:gravity="bottom"
+        android:layout_width="fill_parent"
+        android:orientation="horizontal"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_alignParentBottom="true">
+        
+        <Button
+            android:id="@+id/buttonSendNewProblem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="sendNewProblem"
+            android:layout_weight="1"
+            android:text="@string/newReport" />
+
+        <Button
+            android:id="@+id/buttonShowNearestProblems"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="showNearestProblems"
+            android:text="@string/showNearest" />
+
+        <Button
+            android:id="@+id/closeButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="closeApp"
+            android:layout_weight="1"
+            android:text="@string/exit" />
+    </LinearLayout>
+    
+    <fragment
+        android:id="@+id/map"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/linearLayout1" />
+
+</RelativeLayout>
+
+
+<!-- <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <fragment
+        android:id="@+id/map"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout1"
+        android:layout_width="fill_parent"
+        android:orientation="horizontal"
+        android:layout_height="40sp"
+        android:layout_alignParentTop="true" >
+
+        <Button
+            android:id="@+id/buttonSendNewProblem"
+            android:layout_width="fill_parent"
+            android:minWidth="160sp"
+            android:layout_height="wrap_content"
+            android:onClick="sendNewProblem"
+            android:text="@string/newReport" />
+
+        <Button
+            android:id="@+id/buttonShowNearestProblems"
+            android:layout_width="fill_parent"
+            android:minWidth="160sp"
+            android:layout_height="wrap_content"
+            android:onClick="showNearestProblems"
+            android:text="@string/showNearest" />
+
+        <Button
+            android:id="@+id/closeButton"
+            android:minWidth="160sp"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:onClick="closeApp"
+            android:text="@string/exit" />
+    </LinearLayout>
+
+</RelativeLayout> -->

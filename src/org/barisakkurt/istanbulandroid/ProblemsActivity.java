@@ -1,13 +1,11 @@
 package org.barisakkurt.istanbulandroid;
+
 import android.annotation.SuppressLint;
 import android.app.ActionBar;
 import android.app.ActionBar.Tab;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
  
 @SuppressLint("NewApi")
@@ -18,7 +16,7 @@ public class ProblemsActivity extends FragmentActivity implements
     private TabsPagerAdapter mAdapter;
     private ActionBar actionBar;
     // Tab titles
-    private String[] tabs = { "Top Rated", "Games", "Movies" };
+    private String[] tabs = { "Harita", "Liste"};
  
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,11 +38,8 @@ public class ProblemsActivity extends FragmentActivity implements
                     .setTabListener(this));
         }
  
-        /**
-         * on swiping the viewpager make respective tab selected
-         * */
+        //on swiping the viewpager make respective tab selected
         viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
- 
             @Override
             public void onPageSelected(int position) {
                 // on changing the page
@@ -68,42 +63,12 @@ public class ProblemsActivity extends FragmentActivity implements
  
     @Override
     public void onTabSelected(Tab tab, FragmentTransaction ft) {
-        // on tab selected
-        // show respected fragment view
+        // on tab selected show respected fragment view
         viewPager.setCurrentItem(tab.getPosition());
     }
  
     @Override
     public void onTabUnselected(Tab tab, FragmentTransaction ft) {
-    }
- 
-}
-
-class TabsPagerAdapter extends FragmentPagerAdapter {
-	 
-    public TabsPagerAdapter(FragmentManager fm) {
-        super(fm);
-    }
- 
-    @Override
-    public Fragment getItem(int index) {
- 
-        switch (index) {
-        case 0:
-            // Top Rated fragment activity
-            return new TopRatedFragment();
-        case 1:
-            // Games fragment activity
-            return new GamesFragment();
-        }
- 
-        return null;
-    }
- 
-    @Override
-    public int getCount() {
-        // get item count - equal to number of tabs
-        return 2;
     }
  
 }
