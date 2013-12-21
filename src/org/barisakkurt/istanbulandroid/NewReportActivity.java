@@ -17,6 +17,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -30,12 +32,15 @@ public class NewReportActivity extends BaseActivity {
     private static final int CAMERA_CAPTURE_VIDEO_REQUEST_CODE = 200;
     public static final int MEDIA_TYPE_IMAGE = 1;
     public static final int MEDIA_TYPE_VIDEO = 2;
-    private static final String IMAGE_DIRECTORY_NAME = "Hello Camera";
+    Button buttonSubmit;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_new_report);
+		buttonSubmit = (Button)findViewById(R.id.btnSubmit);
+		
+		buttonSubmit.setEnabled(false);
 		
 		Spinner spinner = (Spinner) findViewById(R.id.categorySpinner);
 		// Create an ArrayAdapter using the string array and a default spinner layout
@@ -76,6 +81,11 @@ public class NewReportActivity extends BaseActivity {
 	                    options);
 	 
 	            imgPreview.setImageBitmap(bitmap);
+	            
+	            
+	            
+	            buttonSubmit.setEnabled(true);
+	            
 	        } catch (NullPointerException e) {
 	            e.printStackTrace();
 	        }
@@ -92,8 +102,7 @@ public class NewReportActivity extends BaseActivity {
 	    // Create the storage directory if it does not exist
 	    if (!mediaStorageDir.exists()) {
 	        if (!mediaStorageDir.mkdirs()) {
-	            Log.d(IMAGE_DIRECTORY_NAME, "Oops! Failed create "
-	                    + IMAGE_DIRECTORY_NAME + " directory");
+	            Log.d("DIZIN", "Dizin yaratýlamadý.");
 	            return null;
 	        }
 	    }

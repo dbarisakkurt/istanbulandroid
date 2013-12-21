@@ -60,7 +60,8 @@ int drawable ic_plusone_medium_off_client 0x7f02001b
 int drawable ic_plusone_small_off_client 0x7f02001c
 int drawable ic_plusone_standard_off_client 0x7f02001d
 int drawable ic_plusone_tall_off_client 0x7f02001e
-int drawable red 0x7f02001f
+int drawable noimage 0x7f02001f
+int drawable red 0x7f020020
 int id action_settings 0x7f05001c
 int id base 0x7f050016
 int id btnCancel 0x7f050015
