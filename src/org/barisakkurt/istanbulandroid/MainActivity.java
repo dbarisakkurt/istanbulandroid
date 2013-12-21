@@ -24,4 +24,9 @@ public class MainActivity extends BaseActivity {
 	    	Toast.makeText(getApplicationContext(), "Bu uygulamayý kullanabilmek için internet baðlantýsý gerekiyor.", Toast.LENGTH_SHORT).show();
 	    }
 	}
+	
+	public void openAboutActivity(View v) {
+		Intent myIntent = new Intent(MainActivity.this, AboutActivity.class);
+    	MainActivity.this.startActivity(myIntent);
+	}
 }

@@ -17,10 +17,10 @@ class TabsPagerAdapter extends FragmentPagerAdapter {
         switch (index) {
         case 0:
             // Top Rated fragment activity
-            return new TopRatedFragment();
+            return new MapFragment();
         case 1:
             // Games fragment activity
-            return new GamesFragment();
+            return new ListFragment();
         }
  
         return null;

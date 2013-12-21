@@ -21,6 +21,8 @@
             android:id="@+id/buttonSendNewProblem"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
             android:onClick="sendNewProblem"
             android:layout_weight="1"
             android:background="@drawable/blue"
@@ -45,14 +47,22 @@
             android:background="@drawable/green"
 			style="@style/ButtonText"
             android:layout_weight="1"
-            android:text="@string/exit" />
+            android:text="@string/back" />
     </LinearLayout>
     
-    <fragment
+    <fragment 
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:map="http://schemas.android.com/apk/res-auto"
         android:id="@+id/map"
         android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        map:cameraTargetLat="41.07521"
+  		map:cameraTargetLng="29.028397"
+        map:mapType="normal"
+        map:cameraZoom="11"
+		map:uiZoomControls="true"
+  		map:uiZoomGestures="true"
         android:layout_above="@+id/linearLayout1" />
 
 </RelativeLayout>

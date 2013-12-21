@@ -8,6 +8,9 @@
 package org.barisakkurt.istanbulandroid;
 
 public final class R {
+    public static final class array {
+        public static final int categoryArray=0x7f0a0000;
+    }
     public static final class attr {
         /** 
     The size of the ad. It must be one of BANNER, FULL_BANNER, LEADERBOARD,
@@ -211,27 +214,33 @@ containing a value of this type.
         public static final int red=0x7f02001f;
     }
     public static final class id {
-        public static final int action_settings=0x7f050016;
-        public static final int base=0x7f050010;
+        public static final int action_settings=0x7f05001c;
+        public static final int base=0x7f050016;
+        public static final int btnCancel=0x7f050015;
+        public static final int btnSubmit=0x7f050014;
         public static final int buttonAbout=0x7f05000e;
         public static final int buttonLogin=0x7f05000d;
         public static final int buttonRegister=0x7f05000c;
-        public static final int buttonSendNewProblem=0x7f050012;
-        public static final int buttonShowNearestProblems=0x7f050013;
-        public static final int closeButton=0x7f050014;
+        public static final int buttonSendNewProblem=0x7f050018;
+        public static final int buttonShowNearestProblems=0x7f050019;
+        public static final int categorySpinner=0x7f050011;
+        public static final int closeButton=0x7f05001a;
+        public static final int editTextAddress=0x7f050013;
+        public static final int editTextDescription=0x7f050012;
         public static final int editTextPassword=0x7f050009;
         public static final int editTextUsername=0x7f050007;
         public static final int hybrid=0x7f050004;
         public static final int imageView1=0x7f050006;
         public static final int imageView2=0x7f050008;
         public static final int imageView3=0x7f05000a;
-        public static final int linearLayout1=0x7f050011;
+        public static final int linearLayout1=0x7f050017;
         public static final int loginButton=0x7f05000b;
         public static final int loginLogo=0x7f050005;
-        public static final int map=0x7f050015;
+        public static final int map=0x7f05001b;
         public static final int none=0x7f050000;
         public static final int normal=0x7f050001;
         public static final int pager=0x7f05000f;
+        public static final int problemImage=0x7f050010;
         public static final int satellite=0x7f050002;
         public static final int terrain=0x7f050003;
     }
@@ -239,23 +248,28 @@ containing a value of this type.
         public static final int google_play_services_version=0x7f070000;
     }
     public static final class layout {
-        public static final int activity_base=0x7f030000;
-        public static final int activity_login=0x7f030001;
-        public static final int activity_main=0x7f030002;
-        public static final int activity_main_problem=0x7f030003;
-        public static final int activity_problems=0x7f030004;
-        public static final int list_tab=0x7f030005;
-        public static final int map_tab=0x7f030006;
+        public static final int activity_about=0x7f030000;
+        public static final int activity_base=0x7f030001;
+        public static final int activity_login=0x7f030002;
+        public static final int activity_main=0x7f030003;
+        public static final int activity_main_problem=0x7f030004;
+        public static final int activity_new_report=0x7f030005;
+        public static final int activity_problems=0x7f030006;
+        public static final int list_tab=0x7f030007;
+        public static final int map_tab=0x7f030008;
     }
     public static final class menu {
-        public static final int base=0x7f0a0000;
-        public static final int login=0x7f0a0001;
-        public static final int main=0x7f0a0002;
-        public static final int problems=0x7f0a0003;
+        public static final int about=0x7f0b0000;
+        public static final int base=0x7f0b0001;
+        public static final int login=0x7f0b0002;
+        public static final int main=0x7f0b0003;
+        public static final int new_report=0x7f0b0004;
+        public static final int problems=0x7f0b0005;
     }
     public static final class string {
         public static final int about=0x7f06001d;
         public static final int action_settings=0x7f06001b;
+        public static final int address=0x7f06002c;
         public static final int app_name=0x7f06001a;
         /**   Title for notification shown when GooglePlayServices needs to be
         enabled for a application to work. [CHAR LIMIT=70] 
@@ -280,6 +294,8 @@ containing a value of this type.
         [CHAR LIMIT=70] 
          */
         public static final int auth_client_using_bad_version_title=0x7f060014;
+        public static final int back=0x7f06002a;
+        public static final int category=0x7f06002d;
         /**  Button in confirmation dialog to enable Google Play services.  Clicking it
         will direct user to application settings of Google Play services where they
         can enable it [CHAR LIMIT=40] 
@@ -351,18 +367,22 @@ containing a value of this type.
         /**  Long form sign-in button text [CHAR LIMIT=30] 
          */
         public static final int common_signin_button_text_long=0x7f060013;
+        public static final int description=0x7f06002b;
         public static final int enter=0x7f060025;
-        public static final int exit=0x7f060027;
+        public static final int exit=0x7f060028;
         public static final int hello_world=0x7f060024;
         public static final int login=0x7f06001f;
         public static final int loginYourAccount=0x7f060021;
-        public static final int newReport=0x7f060026;
+        public static final int newReport=0x7f060027;
         public static final int password=0x7f060023;
         public static final int register=0x7f06001e;
-        public static final int showNearest=0x7f060028;
+        public static final int send=0x7f060026;
+        public static final int showNearest=0x7f060029;
+        public static final int title_activity_about=0x7f06002f;
         public static final int title_activity_base=0x7f06001c;
         public static final int title_activity_login=0x7f060020;
-        public static final int title_activity_problems=0x7f060029;
+        public static final int title_activity_new_report=0x7f060030;
+        public static final int title_activity_problems=0x7f06002e;
         public static final int username=0x7f060022;
     }
     public static final class style {

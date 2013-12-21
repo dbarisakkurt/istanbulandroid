@@ -4,9 +4,11 @@ import android.annotation.SuppressLint;
 import android.app.ActionBar;
 import android.app.ActionBar.Tab;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
+import android.view.View;
  
 @SuppressLint("NewApi")
 public class ProblemsActivity extends FragmentActivity implements
@@ -71,4 +73,16 @@ public class ProblemsActivity extends FragmentActivity implements
     public void onTabUnselected(Tab tab, FragmentTransaction ft) {
     }
  
+   
+    public void closeApp(View v) {
+    	finish();
+    }
+    
+    public void sendNewProblem(View v) {
+    	Intent myIntent = new Intent(ProblemsActivity.this, NewReportActivity.class);
+    	ProblemsActivity.this.startActivity(myIntent);
+    }
+    
+    
+    
 }

@@ -11,7 +11,7 @@ import android.widget.Toast;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
  
-public class TopRatedFragment extends Fragment {
+public class MapFragment extends Fragment {
 	private GoogleMap googleMap;
  
     @Override
@@ -47,6 +47,8 @@ public class TopRatedFragment extends Fragment {
             }
         }
     }
+    
+    
  
     /*
     @Override
@@ -58,7 +60,6 @@ public class TopRatedFragment extends Fragment {
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-
     }
     
 }
