@@ -215,17 +215,17 @@ containing a value of this type.
         public static final int red=0x7f020020;
     }
     public static final class id {
-        public static final int action_settings=0x7f05001c;
-        public static final int base=0x7f050016;
+        public static final int action_settings=0x7f05001f;
+        public static final int base=0x7f050019;
         public static final int btnCancel=0x7f050015;
         public static final int btnSubmit=0x7f050014;
         public static final int buttonAbout=0x7f05000e;
         public static final int buttonLogin=0x7f05000d;
         public static final int buttonRegister=0x7f05000c;
-        public static final int buttonSendNewProblem=0x7f050018;
-        public static final int buttonShowNearestProblems=0x7f050019;
+        public static final int buttonSendNewProblem=0x7f05001b;
+        public static final int buttonShowNearestProblems=0x7f05001c;
         public static final int categorySpinner=0x7f050011;
-        public static final int closeButton=0x7f05001a;
+        public static final int closeButton=0x7f05001d;
         public static final int editTextAddress=0x7f050013;
         public static final int editTextDescription=0x7f050012;
         public static final int editTextPassword=0x7f050009;
@@ -234,10 +234,13 @@ containing a value of this type.
         public static final int imageView1=0x7f050006;
         public static final int imageView2=0x7f050008;
         public static final int imageView3=0x7f05000a;
-        public static final int linearLayout1=0x7f050017;
+        public static final int lblListHeader=0x7f050016;
+        public static final int lblListItem=0x7f050017;
+        public static final int linearLayout1=0x7f05001a;
         public static final int loginButton=0x7f05000b;
         public static final int loginLogo=0x7f050005;
-        public static final int map=0x7f05001b;
+        public static final int lvExp=0x7f050018;
+        public static final int map=0x7f05001e;
         public static final int none=0x7f050000;
         public static final int normal=0x7f050001;
         public static final int pager=0x7f05000f;
@@ -256,8 +259,10 @@ containing a value of this type.
         public static final int activity_main_problem=0x7f030004;
         public static final int activity_new_report=0x7f030005;
         public static final int activity_problems=0x7f030006;
-        public static final int list_tab=0x7f030007;
-        public static final int map_tab=0x7f030008;
+        public static final int list_group=0x7f030007;
+        public static final int list_item=0x7f030008;
+        public static final int list_tab=0x7f030009;
+        public static final int map_tab=0x7f03000a;
     }
     public static final class menu {
         public static final int about=0x7f0b0000;

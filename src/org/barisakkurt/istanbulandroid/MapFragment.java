@@ -10,6 +10,7 @@ import java.util.List;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
+import org.apache.http.StatusLine;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
@@ -172,6 +173,7 @@ public class MapFragment extends Fragment {
 					// no products found Launch Add New product Activity
 				}
 			} catch (JSONException e) {
+				Log.e("RESPONSE","RESPONSIVE RESPONSE");
 				e.printStackTrace();
 			}
 			return null;
@@ -202,7 +204,7 @@ public class MapFragment extends Fragment {
 	        bmOptions.inSampleSize = 1;*/
 	        //Bitmap bm = Utility.loadBitmap(url, bmOptions);
 			
-			googleMap.addMarker(new MarkerOptions().position(new LatLng(d1, d2)).title("bar").snippet("snippet"));
+			googleMap.addMarker(new MarkerOptions().position(new LatLng(d1, d2)).title(title).snippet(body));
 					//.icon(BitmapDescriptorFactory.fromBitmap(bm)));
 		}
 		
@@ -244,15 +246,22 @@ class JSONParser {
 				url += "?" + paramString;
 				HttpGet httpGet = new HttpGet(url);
 				HttpResponse httpResponse = httpClient.execute(httpGet);
+				Log.d("RESPONSE",""+httpResponse.getStatusLine().getStatusCode());
 				HttpEntity httpEntity = httpResponse.getEntity();
 				json = EntityUtils.toString(httpEntity);
 			}
 
 		} catch (UnsupportedEncodingException e) {
+			Log.e("RESPONSE","999999999999999");
 			e.printStackTrace();
 		} catch (ClientProtocolException e) {
+			Log.e("RESPONSE","88888888888888");
 			e.printStackTrace();
 		} catch (IOException e) {
+			Log.e("RESPONSE","8-777777777777777");
+			e.printStackTrace();
+		} catch (Exception e) {
+			Log.e("RESPONSE","776569801298012");
 			e.printStackTrace();
 		}
 
