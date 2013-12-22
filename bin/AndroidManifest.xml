@@ -64,6 +64,10 @@
             android:name="org.barisakkurt.istanbulandroid.NewReportActivity"
             android:label="@string/title_activity_new_report" >
         </activity>
+        <activity
+            android:name="org.barisakkurt.istanbulandroid.SingleListActivity"
+            android:label="@string/title_activity_single_list" >
+        </activity>
     </application>
 
 </manifest>

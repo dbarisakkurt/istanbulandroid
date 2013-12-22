@@ -24,6 +24,8 @@
     <string name="tugay">Tugay İlbay</string>
     <string name="baris">Barış Akkurt</string>
     <string name="title_activity_problems">ProblemsActivity</string>
+    <string name="projectName">İstanbul\'un Sorunları</string>
+    <string name="proejctMotto">İstanbul Sorunlarına Çözümler</string>
 
     <!-- from dibbus blog -->
     <style name="ButtonText">
@@ -42,7 +44,7 @@
 
     <string name="title_activity_about">AboutActivity</string>
     <string name="title_activity_new_report">NewReportActivity</string>
-    
+
     <string-array name="categoryArray">
         <item>Kaldırım Yok</item>
         <item>Engelliler için Uyumsuz</item>
@@ -51,6 +53,7 @@
         <item>Yağmurda Su Doluyor</item>
         <item>Tabela Kırık</item>
     </string-array>
-    
+
+    <string name="title_activity_single_list">SingleListActivity</string>
 
 </resources>

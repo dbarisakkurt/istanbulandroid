@@ -6,19 +6,26 @@
     android:gravity="center"
     android:layout_marginLeft="50dp"
     android:layout_marginRight="50dp"  >
+    
+    <ImageView
+    android:id="@+id/loginLogo"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentTop="true"
+    android:src="@drawable/logo" />
 
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:textSize="32sp"
-        android:text="Proje Adı Burada"
+        android:text="@string/projectName"
         android:gravity="center" />
     
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:textSize="16sp"
-        android:text="Proje Sloganı Burada"
+        android:text="@string/proejctMotto"
         android:gravity="center" />
 
     <Button
@@ -27,7 +34,7 @@
         android:layout_height="wrap_content"
         android:onClick="openRegisterPage"
         android:text="@string/register"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:textSize="36dp" />
 
     <Button
         android:id="@+id/buttonLogin"
@@ -35,7 +42,7 @@
         android:layout_height="wrap_content"
         android:onClick="openLoginActivity"
         android:text="@string/login"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:textSize="36dp" />
 
     <Button
         android:id="@+id/buttonAbout"
@@ -43,6 +50,6 @@
         android:layout_height="wrap_content"
         android:onClick="openAboutActivity"
         android:text="@string/about"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:textSize="36dp" />
 
 </LinearLayout>
