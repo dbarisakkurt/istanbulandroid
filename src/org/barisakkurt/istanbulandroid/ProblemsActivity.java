@@ -63,6 +63,12 @@ public class ProblemsActivity extends FragmentActivity implements
 			}
 		});
 	}
+	
+	/*
+	protected void onRestart() {
+		finish();
+		startActivity(getIntent());
+	}*/
 
 	@Override
 	public void onTabReselected(Tab tab, FragmentTransaction ft) {

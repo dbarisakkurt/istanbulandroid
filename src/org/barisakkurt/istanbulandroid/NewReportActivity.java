@@ -44,6 +44,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -60,6 +61,7 @@ public class NewReportActivity extends BaseActivity {
 	public static final int MEDIA_TYPE_IMAGE = 1;
 	public static final int MEDIA_TYPE_VIDEO = 2;
 	Button buttonSubmit;
+	Spinner spinner;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -68,11 +70,12 @@ public class NewReportActivity extends BaseActivity {
 
 		edtAddress = (EditText) findViewById(R.id.editTextAddress);
 		edtDescription = (EditText) findViewById(R.id.editTextDescription);
+		spinner = (Spinner) findViewById(R.id.categorySpinner);
+
 
 		userId = ((GlobalApplication) getApplication()).getUserId();
 
 		buttonSubmit = (Button) findViewById(R.id.btnSubmit);
-
 		buttonSubmit.setEnabled(false);
 
 		Spinner spinner = (Spinner) findViewById(R.id.categorySpinner);
@@ -133,7 +136,6 @@ public class NewReportActivity extends BaseActivity {
 	}
 
 	private File getOutputMediaFile(int type) {
-		// File
 		// mediaStorageDir=Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
 		File mediaStorageDir = new File("/storage/emulated/0/DCIM/Camera/");
 
@@ -166,20 +168,15 @@ public class NewReportActivity extends BaseActivity {
 		LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 		Location location = lm
 				.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-		double longitude = location.getLongitude();
-		double latitude = location.getLatitude();
 
-		Date d = new Date();
-		String result = "Tarih=" + d.toString();
-		result += "Longitude" + longitude;
-		result += "Latitude" + latitude;
-
-		Toast.makeText(getApplicationContext(), result, Toast.LENGTH_SHORT)
-				.show();
+		
+		
+		
+		finish();
+		
 		try {
 			new UploadReport().execute(filePath);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -281,6 +278,9 @@ public class NewReportActivity extends BaseActivity {
 
 			String address = edtAddress.getText().toString();
 			String description = edtDescription.getText().toString();
+			
+			String category = String.valueOf(spinner.getSelectedItem());
+			
 
 			nameValuePairs.add(new BasicNameValuePair("image", image_str));
 			nameValuePairs.add(new BasicNameValuePair("reportdate", reportDate));
@@ -292,6 +292,9 @@ public class NewReportActivity extends BaseActivity {
 			nameValuePairs.add(new BasicNameValuePair("address", address));
 			nameValuePairs.add(new BasicNameValuePair("description",
 					description));
+			
+			
+			nameValuePairs.add(new BasicNameValuePair("category", category));
 
 			try {
 				HttpClient httpclient = new DefaultHttpClient();

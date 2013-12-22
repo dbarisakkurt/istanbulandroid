@@ -42,27 +42,31 @@ public class ListFragment extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		
+
 		View rootView = inflater.inflate(R.layout.list_tab, container, false);
 		new LoadAllProducts2(this).execute();
 
 		return rootView;
 	}
-	
+
 	@Override
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);
 	}
-	
+
 	@Override
-    public void onResume() {
-        super.onResume();
-    }
+	public void onResume() {
+		super.onResume();
+		//refrest listview
+		ListView lv = (ListView) getActivity().findViewById(R.id.list);
+		lv.invalidateViews();
+	}
 
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 
 	}
+
 	// //////////////////////////////////
 	// /////////////////////////////////////////////////////////////////////////
 	// Background Async Task to Load all product by making HTTP Request
@@ -143,68 +147,71 @@ public class ListFragment extends Fragment {
 			activity.probList = pList;
 			// dismiss the dialog after getting all products
 			// pDialog.dismiss();
-			
 
-			ProblemAdapter probAdapter=new ProblemAdapter(getActivity(),android.R.layout.list_content, probList);
-			
+			ProblemAdapter probAdapter = new ProblemAdapter(getActivity(),
+					android.R.layout.list_content, probList);
+
 			ListView lv = (ListView) getActivity().findViewById(R.id.list);
 			lv.setAdapter(probAdapter);
-			lv.setOnItemClickListener(new OnItemClickListener()
-			{
-			     @Override
-			     public void onItemClick(AdapterView<?> a, View v,int position, long id) 
-			     {			    	 
-			    	 Problem p1=probList.get(position);
+			lv.setOnItemClickListener(new OnItemClickListener() {
+				@Override
+				public void onItemClick(AdapterView<?> a, View v, int position,
+						long id) {
+					Problem p1 = probList.get(position);
 
-		              // Launching new Activity on selecting single List Item
-		              Intent i = new Intent(getActivity(), SingleListActivity.class);
-		              // sending data to new activity
-		              i.putExtra("description", p1.getDescription());
-		              i.putExtra("reportDate", p1.getReportDate());
-		              i.putExtra("category", p1.getCategory());
-		              startActivity(i);
-			      }
+					// Launching new Activity on selecting single List Item
+					Intent i = new Intent(getActivity(),
+							SingleListActivity.class);
+					// sending data to new activity
+					i.putExtra("description", p1.getDescription());
+					i.putExtra("reportDate", p1.getReportDate());
+					i.putExtra("category", p1.getCategory());
+					startActivity(i);
+				}
 			});
 		}
 	}
 }
 
-
 class ProblemAdapter extends ArrayAdapter<Problem> {
-    Context context;
- 
-    public ProblemAdapter(Context context, int resourceId, List<Problem> items) {
-        super(context, resourceId, items);
-        this.context = context;
-    }
- 
-    /*private view holder class*/
-    private class ViewHolder {
-        TextView category;
-        TextView description;
-        TextView reportDate;
-    }
- 
-    public View getView(int position, View convertView, ViewGroup parent) {
-        ViewHolder holder = null;
-        Problem rowItem = getItem(position);
- 
-        LayoutInflater mInflater = (LayoutInflater) context
-                .getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
-        if (convertView == null) {
-            convertView = mInflater.inflate(R.layout.list_item, null);
-            holder = new ViewHolder();
-            holder.category = (TextView) convertView.findViewById(R.id.category);
-            holder.description = (TextView) convertView.findViewById(R.id.description);
-            //holder.reportDate = (TextView) convertView.findViewById(R.id.reportDate);
-            convertView.setTag(holder);
-        } else
-            holder = (ViewHolder) convertView.getTag();
- 
-        holder.category.setText(rowItem.getCategory());
-        holder.description.setText(rowItem.getDescription());
-        //holder.reportDate.setText(rowItem.getReportDate());
- 
-        return convertView;
-    }
+	Context context;
+
+	public ProblemAdapter(Context context, int resourceId, List<Problem> items) {
+		super(context, resourceId, items);
+		this.context = context;
+	}
+
+	/* private view holder class */
+	private class ViewHolder {
+		TextView category;
+		TextView description;
+		TextView reportDate;
+	}
+
+	public View getView(int position, View convertView, ViewGroup parent) {
+		ViewHolder holder = null;
+		Problem rowItem = getItem(position);
+
+		LayoutInflater mInflater = (LayoutInflater) context
+				.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
+		if (convertView == null) {
+			convertView = mInflater.inflate(R.layout.list_item, null);
+			holder = new ViewHolder();
+			holder.category = (TextView) convertView
+					.findViewById(R.id.category);
+			holder.description = (TextView) convertView
+					.findViewById(R.id.description);
+			// holder.reportDate = (TextView)
+			// convertView.findViewById(R.id.reportDate);
+			convertView.setTag(holder);
+		} else
+			holder = (ViewHolder) convertView.getTag();
+
+		holder.category.setText(rowItem.getCategory());
+		holder.description.setText(rowItem.getDescription());
+		// holder.reportDate.setText(rowItem.getReportDate());
+
+		return convertView;
+	}
+
 }
