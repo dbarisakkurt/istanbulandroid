@@ -9,8 +9,17 @@ class Problem {
 	private String description;
 	private String imagePath;
 	
+	public boolean equals(Object o)
+	{
+		Problem p = (Problem) o;
+		//return this.latitude.equals(p.latitude) && this.longitude.equals(p.longitude) && this.reportDate.equals(p.reportDate) && this.description.equals(p.description);
+		return this.imagePath.equals(p.imagePath);
+	}
 	
-	
+	public int hashCode()
+	{
+		return this.imagePath.hashCode();
+	}
 	
 	public String getImagePath() {
 		return imagePath;

@@ -5,7 +5,9 @@ import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -43,7 +45,8 @@ public class MapFragment extends Fragment {
 	// Creating JSON Parser object
 	JSONParser jParser = new JSONParser();
 	public List<Problem> probList;
-	
+	public Set<Problem> problemSet = new HashSet<Problem>();
+
 	// Progress Dialog
 	private ProgressDialog pDialog;
 	private String serverUrl = "http://193.140.196.117/istanbulweb/";
@@ -93,6 +96,11 @@ public class MapFragment extends Fragment {
 		}
 	}
 
+	public void reload()
+	{
+		new LoadAllProducts(this).execute();
+	}
+
 	/*
 	 * @Override protected void onResume() { super.onResume(); initilizeMap(); }
 	 */
@@ -107,9 +115,9 @@ public class MapFragment extends Fragment {
 	class LoadAllProducts extends AsyncTask<String, String, String> {
 		public List<Problem> pList=new ArrayList<Problem>();
 		MapFragment activity;
-		
+
 		public LoadAllProducts (MapFragment activity){
-		    this.activity=activity;
+			this.activity=activity;
 		}
 
 		// Before starting background thread Show Progress Dialog
@@ -148,8 +156,8 @@ public class MapFragment extends Fragment {
 
 						Log.d("iiiiiiiiiiiiiii", "i=" + Integer.toString(i));
 						// Storing each json item in variable
-						
-						
+
+
 						String latitude = c.getString(TAG_LATITUDE);
 						Log.d("LATTTTTTTTTTTTTT=", ""+latitude);
 						String longitude = c.getString(TAG_LONGITUDE);
@@ -157,11 +165,14 @@ public class MapFragment extends Fragment {
 						String description = c.getString(TAG_DESCRIPTION);
 						String reportDate = c.getString(TAG_REPORTDATE);
 						String category= c.getString(TAG_CATEGORY);
-						
+
 						Problem tempProblem=new Problem(latitude, longitude, reportDate);
 						tempProblem.setCategory(category);
 						tempProblem.setDescription(description);
-						
+						tempProblem.setImagePath(photo);
+						tempProblem.setLatitude(latitude);
+						tempProblem.setLongitude(longitude);
+
 						//tempProblem.setImagePath(photo);
 						pList.add(tempProblem);
 					}
@@ -184,31 +195,28 @@ public class MapFragment extends Fragment {
 		}
 
 	}
-	
+
 	public void showNearestProblems(View v) {
 		getActivity().finish();
 		startActivity(getActivity().getIntent());
 	}
-	
+
 	private void addMarkersToMap() {
 
 		for(int i=0; i<probList.size(); i++) {
-			double d1=Double.parseDouble(probList.get(i).getLatitude());
-			double d2=Double.parseDouble(probList.get(i).getLongitude());
-			String title=probList.get(i).getCategory();
-			String body=probList.get(i).getDescription();
-			//String url = serverUrl;
-			//url+=probList.get(i).getImagePath();
-					
-	        /*BitmapFactory.Options bmOptions;
-	        bmOptions = new BitmapFactory.Options();
-	        bmOptions.inSampleSize = 1;*/
-	        //Bitmap bm = Utility.loadBitmap(url, bmOptions);
-			
-			googleMap.addMarker(new MarkerOptions().position(new LatLng(d1, d2)).title(title).snippet(body));
-					//.icon(BitmapDescriptorFactory.fromBitmap(bm)));
+			if(!this.problemSet.contains(probList.get(i)))
+			{
+				this.problemSet.add(probList.get(i));
+
+				double d1=Double.parseDouble(probList.get(i).getLatitude());
+				double d2=Double.parseDouble(probList.get(i).getLongitude());
+				String title=probList.get(i).getCategory();
+				String body=probList.get(i).getDescription();
+
+				googleMap.addMarker(new MarkerOptions().position(new LatLng(d1, d2)).title(title).snippet(body));
+			}
 		}
-		
+
 	}
 }
 

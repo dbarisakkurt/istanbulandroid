@@ -46,10 +46,10 @@
     <string name="title_activity_new_report">NewReportActivity</string>
 
     <string-array name="categoryArray">
-        <item>Bozuk Yol</item>
-        <item>Çöp</item>
-        <item>Diğer</item>
-        <item>Su Baskını</item>
+        <item>BOZUK YOL</item>
+        <item>ÇÖP</item>
+        <item>DİĞER</item>
+        <item>SU BASKINI</item>
     </string-array>
 
     <string name="title_activity_single_list">SingleListActivity</string>

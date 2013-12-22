@@ -1,34 +1,35 @@
 package org.barisakkurt.istanbulandroid;
 
+import java.util.List;
+
 import android.annotation.SuppressLint;
 import android.app.ActionBar;
 import android.app.ActionBar.Tab;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 
 @SuppressLint("NewApi")
 public class ProblemsActivity extends FragmentActivity implements
-		ActionBar.TabListener {
+ActionBar.TabListener {
 
-	
+
 	private ViewPager viewPager;
 	private TabsPagerAdapter mAdapter;
 	private ActionBar actionBar;
 	private String[] tabs = { "Harita", "Liste" };
 	private String userId;
 
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main_problem);
-		
-		
-		
 
 		// Initilization
 		viewPager = (ViewPager) findViewById(R.id.pager);
@@ -63,12 +64,22 @@ public class ProblemsActivity extends FragmentActivity implements
 			}
 		});
 	}
-	
-	/*
+
+
 	protected void onRestart() {
-		finish();
-		startActivity(getIntent());
-	}*/
+		super.onRestart();
+		FragmentManager fragmentManager = this.getSupportFragmentManager();
+		List<Fragment> fragments = fragmentManager.getFragments();
+		for(Fragment fragment : fragments)
+		{
+			if(fragment instanceof MapFragment)
+			{
+				MapFragment mapFragment = (MapFragment)fragment;
+				mapFragment.reload();
+				break;
+			}
+		}
+	}
 
 	@Override
 	public void onTabReselected(Tab tab, FragmentTransaction ft) {
@@ -91,6 +102,21 @@ public class ProblemsActivity extends FragmentActivity implements
 	public void sendNewProblem(View v) {
 		Intent myIntent = new Intent(ProblemsActivity.this, NewReportActivity.class);
 		ProblemsActivity.this.startActivity(myIntent);
+	}
+	
+	public void showNearestProblems(View v)
+	{
+		FragmentManager fragmentManager = this.getSupportFragmentManager();
+		List<Fragment> fragments = fragmentManager.getFragments();
+		for(Fragment fragment : fragments)
+		{
+			if(fragment instanceof MapFragment)
+			{
+				MapFragment mapFragment = (MapFragment)fragment;
+				mapFragment.reload();
+				break;
+			}
+		}
 	}
 }
 
