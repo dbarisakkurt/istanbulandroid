@@ -19,12 +19,16 @@ public class ProblemsActivity extends FragmentActivity implements
 	private TabsPagerAdapter mAdapter;
 	private ActionBar actionBar;
 	private String[] tabs = { "Harita", "Liste" };
+	private String userId;
 
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main_problem);
+		
+		
+		
 
 		// Initilization
 		viewPager = (ViewPager) findViewById(R.id.pager);

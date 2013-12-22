@@ -28,7 +28,7 @@ import android.widget.Toast;
 
 public class ListFragment extends Fragment {
 	JSONArray problems = null;
-	private String urlAllProblems = "http://web.itu.edu.tr/ilbay/istanbulweb/loadBasicProblems.php";
+	private String urlAllProblems = "http://193.140.196.117/istanbulweb/loadBasicProblems.php";
 	JSONParser jParser = new JSONParser();
 	ListFragment activity;
 	private static final String TAG_LATITUDE = "latitude";
@@ -36,19 +36,16 @@ public class ListFragment extends Fragment {
 	private static final String TAG_PHOTO = "photo";
 	private static final String TAG_DESCRIPTION = "description";
 	private static final String TAG_REPORTDATE = "reportdate";
+	private static final String TAG_CATEGORY = "category";
 	public List<Problem> probList = new ArrayList<Problem>();
-	private boolean mIsCreated=false;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		
 		View rootView = inflater.inflate(R.layout.list_tab, container, false);
-		
-
 		new LoadAllProducts2(this).execute();
-    	
-    	
+
 		return rootView;
 	}
 	
@@ -121,7 +118,7 @@ public class ListFragment extends Fragment {
 						String photo = c.getString(TAG_PHOTO);
 						String description = c.getString(TAG_DESCRIPTION);
 						String reportDate = c.getString(TAG_REPORTDATE);
-						String category = "Sorun";
+						String category = c.getString(TAG_CATEGORY);
 
 						Problem tempProblem = new Problem(latitude, longitude,
 								reportDate);
@@ -147,20 +144,7 @@ public class ListFragment extends Fragment {
 			// dismiss the dialog after getting all products
 			// pDialog.dismiss();
 			
-			String[] categoryArray=new String[probList.size()];
-			Problem[] problemArray=new Problem[probList.size()];
-			
-			for(int i=0; i<probList.size(); i++) {
-				categoryArray[i]=probList.get(i).getCategory();
-			}
 
-			
-			//ArrayAdapter adapter=new ArrayAdapter<Problem>(getActivity(), android.R.layout.simple_list_item_1, problemArray);
-			
-			//ProblemAdapter problemAdapter=new ProblemAdapter(getActivity(), android.R.layout.simple_list_item_1, problemArray);
-			
-			//ArrayAdapter adapter=new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, categoryArray);
-			
 			ProblemAdapter probAdapter=new ProblemAdapter(getActivity(),android.R.layout.list_content, probList);
 			
 			ListView lv = (ListView) getActivity().findViewById(R.id.list);
@@ -169,20 +153,9 @@ public class ListFragment extends Fragment {
 			{
 			     @Override
 			     public void onItemClick(AdapterView<?> a, View v,int position, long id) 
-			     {
-			          //Toast.makeText(getActivity(), "Click", Toast.LENGTH_LONG).show();
-			    	// selected item
-		              //String product = ((TextView) v).getText().toString();
-			    	 
+			     {			    	 
 			    	 Problem p1=probList.get(position);
-			    	 
-			    	 /*Toast toast = Toast.makeText(getActivity(),
-			    	            "Item " + (position + 1) + ": " + probList.get(position),
-			    	            Toast.LENGTH_SHORT);
-			    	        toast.setGravity(Gravity.BOTTOM|Gravity.CENTER_HORIZONTAL, 0, 0);
-			    	        toast.show();*/
-			    	 
-		               
+
 		              // Launching new Activity on selecting single List Item
 		              Intent i = new Intent(getActivity(), SingleListActivity.class);
 		              // sending data to new activity
@@ -192,9 +165,7 @@ public class ListFragment extends Fragment {
 		              startActivity(i);
 			      }
 			});
-			
 		}
-
 	}
 }
 

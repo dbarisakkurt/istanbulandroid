@@ -51,13 +51,14 @@ public class MapFragment extends Fragment {
 	
 	// Progress Dialog
 	private ProgressDialog pDialog;
-	private String serverUrl = "http://web.itu.edu.tr/ilbay/istanbulweb/";
-	private String urlAllProblems = "http://web.itu.edu.tr/ilbay/istanbulweb/loadBasicProblems.php";
+	private String serverUrl = "http://193.140.196.117/istanbulweb/";
+	private String urlAllProblems = "http://193.140.196.117/istanbulweb/loadBasicProblems.php";
 	private static final String TAG_LATITUDE = "latitude";
 	private static final String TAG_LONGITUDE = "longitude";
 	private static final String TAG_PHOTO = "photo";
 	private static final String TAG_DESCRIPTION = "description";
 	private static final String TAG_REPORTDATE = "reportdate";
+	private static final String TAG_CATEGORY = "category";
 
 
 	public GoogleMap googleMap;
@@ -160,7 +161,7 @@ public class MapFragment extends Fragment {
 						String photo = c.getString(TAG_PHOTO);
 						String description = c.getString(TAG_DESCRIPTION);
 						String reportDate = c.getString(TAG_REPORTDATE);
-						String category= "Sorun";
+						String category= c.getString(TAG_CATEGORY);
 						
 						Problem tempProblem=new Problem(latitude, longitude, reportDate);
 						tempProblem.setCategory(category);
@@ -194,7 +195,7 @@ public class MapFragment extends Fragment {
 		for(int i=0; i<probList.size(); i++) {
 			double d1=Double.parseDouble(probList.get(i).getLatitude());
 			double d2=Double.parseDouble(probList.get(i).getLongitude());
-			String title="Sorun";
+			String title=probList.get(i).getCategory();
 			String body=probList.get(i).getDescription();
 			//String url = serverUrl;
 			//url+=probList.get(i).getImagePath();
