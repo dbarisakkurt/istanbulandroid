@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory 
+        android:title="@string/gui"
+        android:key="gui_category">
+        
+        <CheckBoxPreference 
+            android:key="show_splash"
+            android:summary="Shows splash screen at startup"
+            android:title="Show Splash Screen" 
+            android:defaultValue="false"
+        />
+        
+        </PreferenceCategory>
+
+</PreferenceScreen>

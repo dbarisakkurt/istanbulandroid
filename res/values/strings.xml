@@ -1,31 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">IstanbulAndroid</string>
-    <string name="action_settings">Ayarlar</string>
-    <string name="title_activity_base">BaseActivity</string>
-    <string name="about">Hakkında</string>
-    <string name="register">Kayıt Ol</string>
-    <string name="login">Giriş Yap</string>
-    <string name="title_activity_login">LoginActivity</string>
-    <string name="loginYourAccount">Giriş Yapın</string>
-    <string name="username">Kullanıcı Adı</string>
-    <string name="password">Şifre</string>
+    <string name="app_name">Sorun İstanbul</string>
+    <string name="action_settings">Setings</string>
+    <string name="title_activity_base">Base Activity</string>
+    <string name="about">About</string>
+    <string name="register">Register</string>
+    <string name="login">Login</string>
+    <string name="title_activity_login">Login</string>
+    <string name="loginYourAccount">Login to your account</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
     <string name="hello_world">Hello world!</string>
-    <string name="enter">Giriş</string>
-    <string name="send">Gönder</string>
-    <string name="newReport">Yeni Rapor</string>
-    <string name="exit">Çıkış</string>
-    <string name="showNearest">Yakınlardaki Problemleri Göster</string>
-    <string name="back">Geri Dön</string>
-    <string name="description">Açıklama</string>
-    <string name="address">Adres</string>
-    <string name="category">Kategori</string>
+    <string name="enter">Enter</string>
+    <string name="send">Send</string>
+    <string name="newReport">New Report</string>
+    <string name="exit">Exit</string>
+    <string name="showNearest">Show nearest problems</string>
+    <string name="back">Back</string>
+    <string name="description">Description</string>
+    <string name="address">Address</string>
+    <string name="category">Category</string>
     <string name="tugay">Tugay İlbay</string>
     <string name="baris">Barış Akkurt</string>
-    <string name="title_activity_problems">ProblemsActivity</string>
-    <string name="projectName">İstanbul\'un Sorunları</string>
-    <string name="proejctMotto">İstanbul Sorunlarına Çözümler</string>
+    <string name="title_activity_problems">Problems</string>
+    <string name="projectName">Sorun İstanbul</string>
+    <string name="proejctMotto">Solutions to Istanbul\'s Problems</string>
+    <string name="namesurname">Name Surname</string>
+    <string name="email">E-mail</string>
+    <string name="submit">Submit</string>
+    <string name="clear">Clear</string>
+    <string name="cancel">Cancel</string>
+    <string name="gui">GUI</string>
 
     <!-- from dibbus blog -->
     <style name="ButtonText">
@@ -54,5 +60,7 @@
 
     <string name="title_activity_single_list">SingleListActivity</string>
     <string name="title_activity_splash">SplashActivity</string>
+    <string name="title_activity_register">RegisterActivity</string>
+    <string name="title_activity_settings">SettingsActivity</string>
 
 </resources>

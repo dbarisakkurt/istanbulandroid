@@ -1,6 +1,7 @@
 package org.barisakkurt.istanbulandroid;
 
 import java.util.ArrayList;
+import android.support.v7.app.ActionBar;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -118,7 +119,6 @@ public class LoginActivity extends BaseActivity {
 
 				
 			} catch (JSONException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 

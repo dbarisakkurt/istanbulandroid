@@ -1,11 +1,12 @@
 package org.barisakkurt.istanbulandroid;
 
 
-import android.os.Bundle;
-import android.os.Handler;
 import android.app.Activity;
 import android.content.Intent;
-import android.view.Menu;
+import android.content.SharedPreferences;
+import android.os.Bundle;
+import android.os.Handler;
+import android.preference.PreferenceManager;
 
 public class SplashActivity extends Activity {
 
@@ -16,20 +17,29 @@ public class SplashActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_splash);
+		
+		SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);  
+        boolean showSplash=sharedPrefs.getBoolean("show_splash", false);
 
-		new Handler().postDelayed(new Runnable() {
-
-			@Override
-			public void run() {
-				// This method will be executed once the timer is over
-				// Start your app main activity
-				Intent i = new Intent(SplashActivity.this, MainActivity.class);
-				startActivity(i);
-
-				// close this activity
-				finish();
-			}
-		}, SPLASH_TIME_OUT);
+        if(showSplash){
+			new Handler().postDelayed(new Runnable() {
+	
+				@Override
+				public void run() {
+					// This method will be executed once the timer is over
+					// Start your app main activity
+					Intent i = new Intent(SplashActivity.this, MainActivity.class);
+					startActivity(i);
+	
+					// close this activity
+					finish();
+				}
+			}, SPLASH_TIME_OUT);
+        }
+        else {
+        	Intent i = new Intent(SplashActivity.this, MainActivity.class);
+            startActivity(i);
+        }
 	}
 
 

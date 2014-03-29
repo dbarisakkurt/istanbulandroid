@@ -1,115 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/base"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical"
-    android:tag="baris"
-    android:id="@+id/base">
-    
-    
+    android:tag="baris" >
+
     <LinearLayout
         android:id="@+id/linearLayout1"
-        android:gravity="bottom"
         android:layout_width="fill_parent"
-        android:orientation="horizontal"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
         android:layout_weight="1"
-        android:layout_alignParentBottom="true">
-        
+        android:gravity="bottom"
+        android:orientation="horizontal" >
+
         <Button
             android:id="@+id/buttonSendNewProblem"
+            style="@style/ButtonText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="40dp"
             android:layout_marginRight="40dp"
-            android:onClick="sendNewProblem"
             android:layout_weight="1"
             android:background="@drawable/blue"
-			style="@style/ButtonText"
+            android:onClick="sendNewProblem"
             android:text="@string/newReport" />
 
         <Button
             android:id="@+id/buttonShowNearestProblems"
+            style="@style/ButtonText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@drawable/red"
-			style="@style/ButtonText"
             android:onClick="showNearestProblems"
             android:text="@string/showNearest" />
 
         <Button
             android:id="@+id/closeButton"
+            style="@style/ButtonText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:onClick="closeApp"
-            android:background="@drawable/green"
-			style="@style/ButtonText"
             android:layout_weight="1"
+            android:background="@drawable/green"
+            android:onClick="closeApp"
             android:text="@string/back" />
     </LinearLayout>
-    
-    <fragment 
+
+    <fragment
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:map="http://schemas.android.com/apk/res-auto"
         android:id="@+id/map"
         android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_above="@+id/linearLayout1"
         map:cameraTargetLat="41.07521"
-  		map:cameraTargetLng="29.028397"
-        map:mapType="normal"
+        map:cameraTargetLng="29.028397"
         map:cameraZoom="11"
-		map:uiZoomControls="true"
-  		map:uiZoomGestures="true"
-        android:layout_above="@+id/linearLayout1" />
+        map:mapType="normal"
+        map:uiZoomControls="true"
+        map:uiZoomGestures="true" />
 
 </RelativeLayout>
-
-
-<!-- <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:orientation="vertical" >
-
-    <fragment
-        android:id="@+id/map"
-        android:name="com.google.android.gms.maps.SupportMapFragment"
-        android:layout_width="fill_parent"
-        android:layout_height="match_parent" />
-
-    <LinearLayout
-        android:id="@+id/linearLayout1"
-        android:layout_width="fill_parent"
-        android:orientation="horizontal"
-        android:layout_height="40sp"
-        android:layout_alignParentTop="true" >
-
-        <Button
-            android:id="@+id/buttonSendNewProblem"
-            android:layout_width="fill_parent"
-            android:minWidth="160sp"
-            android:layout_height="wrap_content"
-            android:onClick="sendNewProblem"
-            android:text="@string/newReport" />
-
-        <Button
-            android:id="@+id/buttonShowNearestProblems"
-            android:layout_width="fill_parent"
-            android:minWidth="160sp"
-            android:layout_height="wrap_content"
-            android:onClick="showNearestProblems"
-            android:text="@string/showNearest" />
-
-        <Button
-            android:id="@+id/closeButton"
-            android:minWidth="160sp"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:onClick="closeApp"
-            android:text="@string/exit" />
-    </LinearLayout>
-
-</RelativeLayout> -->

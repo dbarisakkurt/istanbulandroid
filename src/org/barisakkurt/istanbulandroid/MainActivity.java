@@ -27,13 +27,15 @@ public class MainActivity extends BaseActivity {
 	}
 	
 	public void openRegisterPage(View v) {
-		String url="http://web.itu.edu.tr/ilbay/istanbulweb/signup.php";
+		Intent myIntent = new Intent(MainActivity.this, RegisterActivity.class);
+		startActivity(myIntent);
+		/*String url="http://web.itu.edu.tr/ilbay/istanbulweb/signup.php";
 		Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-		startActivity(browserIntent);
+		startActivity(browserIntent);*/
 	}
 	
-	public void openAboutActivity(View v) {
+	/*public void openAboutActivity(View v) {
 		Intent myIntent = new Intent(MainActivity.this, AboutActivity.class);
     	MainActivity.this.startActivity(myIntent);
-	}
+	}*/
 }

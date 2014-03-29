@@ -5,12 +5,12 @@ import java.util.List;
 import android.annotation.SuppressLint;
 import android.app.ActionBar;
 import android.app.ActionBar.Tab;
+import android.app.Fragment;
+import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 
@@ -68,9 +68,9 @@ ActionBar.TabListener {
 
 	protected void onRestart() {
 		super.onRestart();
-		FragmentManager fragmentManager = this.getSupportFragmentManager();
-		List<Fragment> fragments = fragmentManager.getFragments();
-		for(Fragment fragment : fragments)
+		android.support.v4.app.FragmentManager fragmentManager = this.getSupportFragmentManager();
+		List<android.support.v4.app.Fragment> fragments = fragmentManager.getFragments();
+		for(android.support.v4.app.Fragment fragment : fragments)
 		{
 			if(fragment instanceof MapFragment)
 			{
@@ -106,9 +106,9 @@ ActionBar.TabListener {
 	
 	public void showNearestProblems(View v)
 	{
-		FragmentManager fragmentManager = this.getSupportFragmentManager();
-		List<Fragment> fragments = fragmentManager.getFragments();
-		for(Fragment fragment : fragments)
+		android.support.v4.app.FragmentManager fragmentManager = this.getSupportFragmentManager();
+		List<android.support.v4.app.Fragment> fragments = fragmentManager.getFragments();
+		for(android.support.v4.app.Fragment fragment : fragments)
 		{
 			if(fragment instanceof MapFragment)
 			{
