@@ -66,11 +66,11 @@
         </activity>
         <activity
             android:name="org.barisakkurt.istanbulandroid.SplashActivity"
-            android:label="Istanbul Android"
-            android:theme="@android:style/Theme.Black.NoTitleBar"
-            android:screenOrientation="portrait"
             android:clearTaskOnLaunch="true"
-            android:noHistory="true" >
+            android:label="Istanbul Android"
+            android:noHistory="true"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Black.NoTitleBar" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -84,6 +84,10 @@
         <activity
             android:name="org.barisakkurt.istanbulandroid.SettingsActivity"
             android:label="@string/title_activity_settings" >
+        </activity>
+        <activity
+            android:name="org.barisakkurt.istanbulandroid.ContactActivity"
+            android:label="@string/title_activity_contact" >
         </activity>
     </application>
 

@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -34,11 +35,11 @@ public class BaseActivity extends Activity {
 			return true;
 
 		case R.id.menu_contact:
-			//openContactActivity();
+			openContactActivity();
 			return true;
 
 		case R.id.menu_rate_app:
-			//openRateApp();
+			openRateApp();
 			return true;
 			
 		case R.id.menu_settings:
@@ -59,6 +60,16 @@ public class BaseActivity extends Activity {
 	public void openSettingsActivity() {
 		Intent myIntent = new Intent(this, SettingsActivity.class);
     	startActivity(myIntent);
+	}
+	
+	public void openContactActivity() {
+		Intent myIntent = new Intent(this, ContactActivity.class);
+    	startActivity(myIntent);
+	}
+	
+	public void openRateApp() {
+		Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.google.com"));
+		startActivity(browserIntent);
 	}
 	
 	//returns true if device is online

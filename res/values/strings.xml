@@ -3,6 +3,9 @@
 
     <string name="app_name">Sorun İstanbul</string>
     <string name="action_settings">Setings</string>
+    <string name="settings">Setings</string>
+    <string name="contact">Contact</string>
+    <string name="rate_app">Rate the App</string>
     <string name="title_activity_base">Base Activity</string>
     <string name="about">About</string>
     <string name="register">Register</string>
@@ -11,6 +14,7 @@
     <string name="loginYourAccount">Login to your account</string>
     <string name="username">Username</string>
     <string name="password">Password</string>
+    <string name="remember_me">Remember me</string>
     <string name="hello_world">Hello world!</string>
     <string name="enter">Enter</string>
     <string name="send">Send</string>
@@ -32,6 +36,28 @@
     <string name="clear">Clear</string>
     <string name="cancel">Cancel</string>
     <string name="gui">GUI</string>
+    <string name="faq">Sıkça Sorulan Sorular</string>
+    <string name="developers">Geliştiriciler</string>
+    <string name="copyright">Bazı hakları saklıdır.</string>
+    <string name="dev_date">Mart - 2014</string>
+    <string name="show_problems">Show All Problems</string>
+    <string name="retype_password">Retype Password</string>
+    <string name="dev_tech">Uygulama Java, Android SDK; internet sitesi PHP, JavaScript, Bootstrap ve Sqlite ile geliştirilmiştir.</string>
+    <string name="faq_q1">1-Bu uygulamayı niye yaptınız?</string>
+    <string name="faq_a1">Son yıllarda özellikle İstanbul\'da kentin sorunları çığ gibi büyümüş durumda. Belediyeler bu sorunlara bazen çözüm üretiyorlar, bazen bilerek üretmeyip görmezden geliyorlar veya sorunlar kendilerine ulaşmadığı için ilgilenemiyorlar. Biz de bu uygulama ile akıllı telefonu olan İstanbulluların İstanbul\'un sorunlarını belgelemeye yardım etmelerini istiyoruz. Böylece belediyeler siteyi ve uygulamayı tanıdıktan sonra sizin belirttiğiniz sorunlara daha kolay müdahalede bulunabilirler.</string>
+    <string name="faq_q2">2-Bu uygulamanın herhangi bir belediye ile resmi bir ilişkisi var mıdır?</string>
+    <string name="faq_a2">Hayır, uygulamanın herhangi bir belediye ile resmi bir ilişkisi bulunmamaktadır.</string>
+    <string name="faq_q3">3-Uygulamanın kullanım şeklini kısaca anlatır mısınız?</string>
+    <string name="faq_a3">Diyelim ki dışarıda yürürken yolda büyük bir çukur gördünüz. Bu çukurun kapatılması toplumun yararına olacaktır. Bu hatayı belgelendirmek ve yetkililere ulaşmasını sağlamak için uygulamaya giriş yapın. Yeni rapor düğmesine tıklayın. Çukurun fotoğrafını çekin ve ilgili bilgileri doldurup gönderin. Bu sayede İstanbul haritasına bir pin eklenecektir ve sorununuz listelenecektir. Belediye çalışanları siteye girdiğinde bunu görüp bu soruna kısa sürede bir çözüm bulabilecektir.</string>
+    <string name="faq_q4">4-Uygulamanız güzel ama yerel yönetimlerle işbirliğiniz yok. Olsaydı daha iyi olmaz mıydı?</string>
+    <string name="faq_a4">Evet olurdu. Bu konuyla ilgili yerel yönetimlerle görüşmelerde bulunmayı biz de isteriz.</string>
+    
+    
+    
+    <string name="aboutInfo1">Sorun İstanbul projesi İstanbul kent sorunlarının bizzat İstanbullular tarafından belgelenebilmesi için yapılmış ve bunları belediyelerin dikkatine sunmayı hedefleyen bir akıllı şehir uygulamasıdır. </string>
+    <string name="aboutInfo2">Sorun İstanbul projesi dahilindeki Android uygulaması ile İstanbullular kentte rasladıkları sorunların fotoğrafını çeker ve bunu haritaya ekler. İlgilenen belediyeler ise bu harita yardımıyla sorunları kolaylıkla bulabilir ve müdahale edebilir.</string>
+    <string name="aboutInfo3">Yurttaşlar listelenen sorunlara oy verebilir ve böylece daha çok kişinin yaşamını olumsuz etkileyen sorunlar daha kolay ortaya çıkar ve acil sorunlara öncelik verilir.</string>
+    <string name="aboutInfo4">Sorun İstanbul projesi bir web uygulaması ve bir Android uygulamasından oluşur ve D. Barış Akkurt ve Tugay M. İlbay tarafından geliştirilmektedir. Sorun İstanbul projesinin herhangi bir belediye ile resmi ilişkisi yoktur.</string>
 
     <!-- from dibbus blog -->
     <style name="ButtonText">
@@ -62,5 +88,6 @@
     <string name="title_activity_splash">SplashActivity</string>
     <string name="title_activity_register">RegisterActivity</string>
     <string name="title_activity_settings">SettingsActivity</string>
+    <string name="title_activity_contact">ContactActivity</string>
 
 </resources>

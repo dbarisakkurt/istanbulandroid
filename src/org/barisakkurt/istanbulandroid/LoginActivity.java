@@ -1,7 +1,6 @@
 package org.barisakkurt.istanbulandroid;
 
 import java.util.ArrayList;
-import android.support.v7.app.ActionBar;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -12,48 +11,71 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
+import org.barisakkurt.istanbulweb.utilty.Utility;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
 public class LoginActivity extends BaseActivity {
+	public static final String PREFS_NAME = "APP_PREFS";
+	EditText editTextUsername;
+	EditText editTextPassword;
+	CheckBox checkBoxRemember;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_login);
+		
+		editTextUsername = (EditText) findViewById(R.id.editTextUsername);
+		editTextPassword = (EditText) findViewById(R.id.editTextPassword);
+		checkBoxRemember = (CheckBox) findViewById(R.id.checkBoxRememberMe);
+		
+		SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);  
+        String usrName=sharedPrefs.getString("username_text", "");
+        String passwd=sharedPrefs.getString("password_text", "");
+        boolean rememberCheck=sharedPrefs.getBoolean("remember_check", false);
+        
+        editTextUsername.setText(usrName);
+        editTextPassword.setText(passwd);
+        checkBoxRemember.setChecked(rememberCheck);
 	}
 
 	public void openProblemsActivity(View v) {
-		EditText editTextUsername = (EditText) findViewById(R.id.editTextUsername);
-		EditText editTextPassword = (EditText) findViewById(R.id.editTextPassword);
 
-		// if(Utility.isTextInRange(password) &&
-		// Utility.validateEmail(username)) {
-		String username = editTextUsername.getText().toString();
-		String password = editTextPassword.getText().toString();
-
-		// Intent myIntent = new Intent(LoginActivity.this,
-		// ProblemsActivity.class);
-		// myIntent.putExtra("key", value); //uncomment if you want to add
-		// parameter
-		// LoginActivity.this.startActivity(myIntent);
-
-		String params[] = { username, password };
-		new LoginTask().execute(params);
-		// }
-		// else {
-		// Toast.makeText(getApplicationContext(),
-		// "E-posta ve þifreniz kriterleri karþýlamýyor.",
-		// Toast.LENGTH_SHORT).show();
-		// }
+		String username=editTextUsername.getText().toString();
+		String password=editTextPassword.getText().toString();
+		
+		if(!this.isOnline()) {
+			Toast.makeText(getApplicationContext(),
+					"Lütfen internet baðlantýnýzý kontrol edin.",
+					Toast.LENGTH_SHORT).show();
+		}
+		else if (Utility.isTextInRange(password) && Utility.validateEmail(username)) {
+			String params[] = { username, password };
+			
+			if(checkBoxRemember.isChecked()) {
+				PreferenceManager.getDefaultSharedPreferences(this).edit().putString("username_text", editTextUsername.getText().toString())
+				.putString("password_text", editTextPassword.getText().toString()).putBoolean("remember_check",  checkBoxRemember.isChecked()).commit();
+			}
+			
+			
+			new LoginTask().execute(params);
+		} else {
+			Toast.makeText(getApplicationContext(),
+					"E-posta ve þifreniz kriterleri karþýlamýyor.",
+					Toast.LENGTH_SHORT).show();
+		}
 	}
 
 	class LoginTask extends AsyncTask<String, String, String> {
@@ -95,34 +117,30 @@ public class LoginActivity extends BaseActivity {
 				String loginResult = resultJson.getString("status");
 
 				validation = (loginResult.equals("success"));
-				
+
 				if (validation) { // open activity
-					
+
 					String userId = resultJson.getString("id");
 					String name = resultJson.getString("name");
 					String mail = resultJson.getString("mail");
-					
-					
-					((GlobalApplication)LoginActivity.this.getApplication()).setUserId(userId);
-					
-					Intent myIntent = new Intent(LoginActivity.this, ProblemsActivity.class);
+
+					((GlobalApplication) LoginActivity.this.getApplication())
+							.setUserId(userId);
+
+					Intent myIntent = new Intent(LoginActivity.this,
+							ProblemsActivity.class);
 					myIntent.putExtra("id", userId);
 					LoginActivity.this.startActivity(myIntent);
-					
-					
-					
-					
+
 				} else {
-					Toast.makeText(getApplicationContext(),
-							result, Toast.LENGTH_LONG).show();
+					Toast.makeText(getApplicationContext(), result,
+							Toast.LENGTH_LONG).show();
 				}
 
-				
 			} catch (JSONException e) {
 				e.printStackTrace();
 			}
 
-			
 		}
 
 	}

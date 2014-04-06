@@ -27,6 +27,7 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.params.CoreProtocolPNames;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -244,6 +245,7 @@ public class NewReportActivity extends BaseActivity {
 			return res;
 		}
 
+		@SuppressLint("NewApi")
 		@Override
 		protected String doInBackground(String... params) {
 

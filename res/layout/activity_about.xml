@@ -12,26 +12,100 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textSize="24dp"
         android:text="@string/about" />
     
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Bu uygulama Kodathon'da geliştirilmiştir." />
+        android:text="@string/aboutInfo1" />
     
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="21-22 Aralık 2013" />
+        android:text="@string/aboutInfo2" />
     
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/tugay" />
+        android:text="@string/aboutInfo3" />
+    
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/aboutInfo4" />
+    
+     <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="24dp"
+        android:text="@string/faq" />
+     
+     <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/faq_q1" />
+     
+     <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/faq_a1" />
+     
+     <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/faq_q2" />
+     
+     <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/faq_a2" />
+     
+     <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/faq_q3" />
+     
+     <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/faq_a3" />
+     
+     <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/faq_q4" />
+     
+     <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/faq_a4" />
+     
+     <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="24dp"
+        android:text="@string/developers" />
+     
+    
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/dev_date" />
+    
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/dev_tech" />
     
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/baris" />
+    
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tugay" />
 
 </LinearLayout>

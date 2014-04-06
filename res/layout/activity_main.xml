@@ -49,7 +49,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:onClick="openAboutActivity"
-        android:text="@string/about"
+        android:text="@string/show_problems"
         android:textSize="36dp" />
 
 </LinearLayout>
