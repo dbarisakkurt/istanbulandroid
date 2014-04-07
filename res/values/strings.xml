@@ -8,6 +8,8 @@
     <string name="rate_app">Rate the App</string>
     <string name="title_activity_base">Base Activity</string>
     <string name="about">About</string>
+    <string name="latitude">Latitude</string>
+    <string name="longitude">Longitude</string>
     <string name="register">Register</string>
     <string name="login">Login</string>
     <string name="title_activity_login">Login</string>
@@ -21,6 +23,7 @@
     <string name="newReport">New Report</string>
     <string name="exit">Exit</string>
     <string name="showNearest">Show nearest problems</string>
+    <string name="refresh">Refresh</string>
     <string name="back">Back</string>
     <string name="description">Description</string>
     <string name="address">Address</string>

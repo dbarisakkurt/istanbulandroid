@@ -35,7 +35,7 @@
             android:layout_weight="1"
             android:background="@drawable/red"
             android:onClick="showNearestProblems"
-            android:text="@string/showNearest" />
+            android:text="@string/refresh" />
 
         <Button
             android:id="@+id/closeButton"
@@ -55,6 +55,10 @@
         android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
         android:layout_above="@+id/linearLayout1"
         map:cameraTargetLat="41.07521"
         map:cameraTargetLng="29.028397"

@@ -63,23 +63,26 @@ public class NewReportActivity extends BaseActivity {
 	public static final int MEDIA_TYPE_VIDEO = 2;
 	Button buttonSubmit;
 	Spinner spinner;
+	EditText editTextLat, editTextLong;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_new_report);
 
+		spinner = (Spinner) findViewById(R.id.categorySpinner);
+		editTextLat = (EditText) findViewById(R.id.editTextLatitude1);
+		editTextLong = (EditText) findViewById(R.id.editTextLongitude1);
+		
 		edtAddress = (EditText) findViewById(R.id.editTextAddress);
 		edtDescription = (EditText) findViewById(R.id.editTextDescription);
-		spinner = (Spinner) findViewById(R.id.categorySpinner);
-
 
 		userId = ((GlobalApplication) getApplication()).getUserId();
 
 		buttonSubmit = (Button) findViewById(R.id.btnSubmit);
 		buttonSubmit.setEnabled(false);
 
-		Spinner spinner = (Spinner) findViewById(R.id.categorySpinner);
+		//Spinner spinner = (Spinner) findViewById(R.id.categorySpinner);
 		// Create an ArrayAdapter using the string array and a default spinner
 		// layout
 		ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
@@ -125,6 +128,20 @@ public class NewReportActivity extends BaseActivity {
 				imgPreview.setImageBitmap(bitmap);
 
 				buttonSubmit.setEnabled(true);
+				
+				
+				
+				
+				LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+				Location location = lm
+						.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+				double longitude = location.getLongitude();
+				double latitude = location.getLatitude();
+				String strLongitude = Double.toString(longitude);
+				String strLatitude = Double.toString(latitude);
+				
+				editTextLat.setText(strLatitude);
+				editTextLong.setText(strLongitude);
 
 			} catch (NullPointerException e) {
 				e.printStackTrace();
@@ -277,6 +294,7 @@ public class NewReportActivity extends BaseActivity {
 			double latitude = location.getLatitude();
 			String strLongitude = Double.toString(longitude);
 			String strLatitude = Double.toString(latitude);
+
 
 			String address = edtAddress.getText().toString();
 			String description = edtDescription.getText().toString();
