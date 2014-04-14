@@ -5,31 +5,62 @@ import java.util.List;
 import android.annotation.SuppressLint;
 import android.app.ActionBar;
 import android.app.ActionBar.Tab;
-import android.app.Fragment;
-import android.app.FragmentManager;
+import android.app.AlertDialog;
 import android.app.FragmentTransaction;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 
 @SuppressLint("NewApi")
 public class ProblemsActivity extends FragmentActivity implements
-ActionBar.TabListener {
-
+		ActionBar.TabListener {
 
 	private ViewPager viewPager;
 	private TabsPagerAdapter mAdapter;
 	private ActionBar actionBar;
 	private String[] tabs = { "Harita", "Liste" };
 	private String userId;
-
+	Button left, middle, right;
+	public boolean showButtons=true;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main_problem);
+
+		Intent i = getIntent();
+		showButtons = i.getBooleanExtra("showButons", true);
+
+		if (i.getStringExtra("userid") != null) {
+			String a = i.getStringExtra("userid");
+			Log.d("REGISTER_SONRA", a);
+		}
+
+		/*
+		 * View view = infliater.inflate(R.layout.map_tab, container, false);
+		 * //ImageView imageView = (ImageView)
+		 * view.findViewById(R.id.imageView1);
+		 * //imageView.setImageResource(imageResourceId);
+		 * //imageView.setBackgroundResource(imageResourceId);
+		 * 
+		 * Button button = (Button) view.findViewById(R.id.btn1);
+		 */
+
+		/*
+		 * left=(Button) findViewById(R.id.buttonSendNewProblem);
+		 * middle=(Button) findViewById(R.id.buttonShowNearestProblems);
+		 * right=(Button) findViewById(R.id.closeButton);
+		 * 
+		 * if(showButtons==false) { left.setVisibility(View.INVISIBLE);
+		 * right.setVisibility(View.INVISIBLE);
+		 * middle.setVisibility(View.INVISIBLE); }
+		 */
 
 		// Initilization
 		viewPager = (ViewPager) findViewById(R.id.pager);
@@ -65,16 +96,15 @@ ActionBar.TabListener {
 		});
 	}
 
-
 	protected void onRestart() {
 		super.onRestart();
-		android.support.v4.app.FragmentManager fragmentManager = this.getSupportFragmentManager();
-		List<android.support.v4.app.Fragment> fragments = fragmentManager.getFragments();
-		for(android.support.v4.app.Fragment fragment : fragments)
-		{
-			if(fragment instanceof MapFragment)
-			{
-				MapFragment mapFragment = (MapFragment)fragment;
+		android.support.v4.app.FragmentManager fragmentManager = this
+				.getSupportFragmentManager();
+		List<android.support.v4.app.Fragment> fragments = fragmentManager
+				.getFragments();
+		for (android.support.v4.app.Fragment fragment : fragments) {
+			if (fragment instanceof MapFragment) {
+				MapFragment mapFragment = (MapFragment) fragment;
 				mapFragment.reload();
 				break;
 			}
@@ -100,23 +130,55 @@ ActionBar.TabListener {
 	}
 
 	public void sendNewProblem(View v) {
-		Intent myIntent = new Intent(ProblemsActivity.this, NewReportActivity.class);
-		ProblemsActivity.this.startActivity(myIntent);
+		LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+
+		if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+			// Toast.makeText(this, "GPS is Enabled in your devide",
+			// Toast.LENGTH_SHORT).show();
+			Intent myIntent = new Intent(ProblemsActivity.this,
+					NewReportActivity.class);
+			ProblemsActivity.this.startActivity(myIntent);
+		} else {
+			showGPSDisabledAlertToUser();
+		}
+
 	}
-	
-	public void showNearestProblems(View v)
-	{
-		android.support.v4.app.FragmentManager fragmentManager = this.getSupportFragmentManager();
-		List<android.support.v4.app.Fragment> fragments = fragmentManager.getFragments();
-		for(android.support.v4.app.Fragment fragment : fragments)
-		{
-			if(fragment instanceof MapFragment)
-			{
-				MapFragment mapFragment = (MapFragment)fragment;
+
+	public void showNearestProblems(View v) {
+		android.support.v4.app.FragmentManager fragmentManager = this
+				.getSupportFragmentManager();
+		List<android.support.v4.app.Fragment> fragments = fragmentManager
+				.getFragments();
+		for (android.support.v4.app.Fragment fragment : fragments) {
+			if (fragment instanceof MapFragment) {
+				MapFragment mapFragment = (MapFragment) fragment;
 				mapFragment.reload();
 				break;
 			}
 		}
 	}
-}
 
+	private void showGPSDisabledAlertToUser() {
+		AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+		alertDialogBuilder
+				.setMessage(
+						"GPS'iniz kapalýdýr. Uygulamanýn çalýþmasý için açýk olmalýdýr.")
+				.setCancelable(false)
+				.setPositiveButton("GPS Ayarýna Git",
+						new DialogInterface.OnClickListener() {
+							public void onClick(DialogInterface dialog, int id) {
+								Intent callGPSSettingIntent = new Intent(
+										android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+								startActivity(callGPSSettingIntent);
+							}
+						});
+		alertDialogBuilder.setNegativeButton("Ýptal",
+				new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int id) {
+						dialog.cancel();
+					}
+				});
+		AlertDialog alert = alertDialogBuilder.create();
+		alert.show();
+	}
+}

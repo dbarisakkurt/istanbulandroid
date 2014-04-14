@@ -25,18 +25,27 @@ import org.json.JSONObject;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Intent;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.SpannableString;
+import android.text.style.ForegroundColorSpan;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.GoogleMap.InfoWindowAdapter;
+import com.google.android.gms.maps.GoogleMap.OnInfoWindowClickListener;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 public class MapFragment extends Fragment {
@@ -46,6 +55,9 @@ public class MapFragment extends Fragment {
 	JSONParser jParser = new JSONParser();
 	public List<Problem> probList;
 	public Set<Problem> problemSet = new HashSet<Problem>();
+	Button left, right, middle;
+	
+	
 
 	// Progress Dialog
 	private ProgressDialog pDialog;
@@ -57,15 +69,33 @@ public class MapFragment extends Fragment {
 	private static final String TAG_DESCRIPTION = "description";
 	private static final String TAG_REPORTDATE = "reportdate";
 	private static final String TAG_CATEGORY = "category";
-
+	private static final String TAG_PROBLEM_ID = "problemid";
 
 	public GoogleMap googleMap;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
+		
+		boolean showBut=((ProblemsActivity)this.getActivity()).showButtons;
+
 
 		View rootView = inflater.inflate(R.layout.map_tab, container, false);
+		
+		Log.d("LEFT1", showBut+"");
+		left=(Button) rootView.findViewById(R.id.buttonSendNewProblem);
+		Log.d("LEFT2", left.toString());
+		middle=(Button) rootView.findViewById(R.id.buttonShowNearestProblems);
+		right=(Button) rootView.findViewById(R.id.closeButton);
+		
+		
+
+		if(showBut==false) {
+			left.setVisibility(View.INVISIBLE);
+			middle.setVisibility(View.INVISIBLE);
+			right.setVisibility(View.INVISIBLE);
+		}
+		
 
 		try {
 			// Loading map
@@ -96,8 +126,7 @@ public class MapFragment extends Fragment {
 		}
 	}
 
-	public void reload()
-	{
+	public void reload() {
 		new LoadAllProducts(this).execute();
 	}
 
@@ -113,11 +142,11 @@ public class MapFragment extends Fragment {
 	// /////////////////////////////////////////////////////////////////////////
 	// Background Async Task to Load all product by making HTTP Request
 	class LoadAllProducts extends AsyncTask<String, String, String> {
-		public List<Problem> pList=new ArrayList<Problem>();
+		public List<Problem> pList = new ArrayList<Problem>();
 		MapFragment activity;
 
-		public LoadAllProducts (MapFragment activity){
-			this.activity=activity;
+		public LoadAllProducts(MapFragment activity) {
+			this.activity = activity;
 		}
 
 		// Before starting background thread Show Progress Dialog
@@ -157,30 +186,32 @@ public class MapFragment extends Fragment {
 						Log.d("iiiiiiiiiiiiiii", "i=" + Integer.toString(i));
 						// Storing each json item in variable
 
-
 						String latitude = c.getString(TAG_LATITUDE);
-						Log.d("LATTTTTTTTTTTTTT=", ""+latitude);
+						Log.d("LATTTTTTTTTTTTTT=", "" + latitude);
 						String longitude = c.getString(TAG_LONGITUDE);
 						String photo = c.getString(TAG_PHOTO);
 						String description = c.getString(TAG_DESCRIPTION);
 						String reportDate = c.getString(TAG_REPORTDATE);
-						String category= c.getString(TAG_CATEGORY);
+						String category = c.getString(TAG_CATEGORY);
+						String problemId = c.getString(TAG_PROBLEM_ID);
 
-						Problem tempProblem=new Problem(latitude, longitude, reportDate);
+						Problem tempProblem = new Problem(latitude, longitude,
+								reportDate);
 						tempProblem.setCategory(category);
 						tempProblem.setDescription(description);
 						tempProblem.setImagePath(photo);
 						tempProblem.setLatitude(latitude);
 						tempProblem.setLongitude(longitude);
+						tempProblem.setProblemId(problemId);
 
-						//tempProblem.setImagePath(photo);
+						// tempProblem.setImagePath(photo);
 						pList.add(tempProblem);
 					}
 				} else {
 					// no products found Launch Add New product Activity
 				}
 			} catch (JSONException e) {
-				Log.e("RESPONSE","RESPONSIVE RESPONSE");
+				Log.e("RESPONSE", "RESPONSIVE RESPONSE");
 				e.printStackTrace();
 			}
 			return null;
@@ -188,7 +219,7 @@ public class MapFragment extends Fragment {
 
 		// After completing background task Dismiss the progress dialog
 		protected void onPostExecute(String file_url) {
-			activity.probList=pList;
+			activity.probList = pList;
 			addMarkersToMap();
 			// dismiss the dialog after getting all products
 			pDialog.dismiss();
@@ -203,17 +234,124 @@ public class MapFragment extends Fragment {
 
 	private void addMarkersToMap() {
 
-		for(int i=0; i<probList.size(); i++) {
-			if(!this.problemSet.contains(probList.get(i)))
-			{
+		for (int i = 0; i < probList.size(); i++) {
+			if (!this.problemSet.contains(probList.get(i))) {
 				this.problemSet.add(probList.get(i));
 
-				double d1=Double.parseDouble(probList.get(i).getLatitude());
-				double d2=Double.parseDouble(probList.get(i).getLongitude());
-				String title=probList.get(i).getCategory();
-				String body=probList.get(i).getDescription();
+				double d1 = Double.parseDouble(probList.get(i).getLatitude());
+				double d2 = Double.parseDouble(probList.get(i).getLongitude());
+				String title = probList.get(i).getCategory();
+				
+				String body=probList.get(i).getProblemId()+";;";
+				body += probList.get(i).getDescription();
+				
 
-				googleMap.addMarker(new MarkerOptions().position(new LatLng(d1, d2)).title(title).snippet(body));
+					
+
+				
+				googleMap.setInfoWindowAdapter(new InfoWindowAdapter() {
+					private final View contents = getActivity().getLayoutInflater().inflate(
+							R.layout.map_marker, null);
+
+					@Override
+					public View getInfoWindow(Marker marker) {
+						// Only changing the content for this tutorial
+						// if you return null, it will just use the default
+						// window
+						return null;
+					}
+
+					@Override
+					public View getInfoContents(Marker marker) {
+						//EventInfo eventInfo = eventMarkerMap.get(marker);
+						String title = marker.getTitle();
+						String body=marker.getSnippet();
+						//String markerId=marker.get
+						
+						
+						String[] bodyTextArray=body.split("(;;)");
+						String bodyText="";
+						String idText="";
+						if(bodyTextArray.length==2) {
+							bodyText=bodyTextArray[1];
+							idText=bodyTextArray[0];
+						}
+						
+						TextView txtTitle = ((TextView) contents
+								.findViewById(R.id.txtInfoWindowTitle));
+						if (title != null) {
+							// Spannable string allows us to edit the formatting
+							// of the text.
+							SpannableString titleText = new SpannableString(
+									title);
+							titleText.setSpan(
+									new ForegroundColorSpan(Color.RED), 0,
+									titleText.length(), 0);
+							txtTitle.setText(titleText);
+						} else {
+							txtTitle.setText("");
+						}
+						TextView txtType = ((TextView) contents
+								.findViewById(R.id.txtInfoWindowEventType));
+						txtType.setText(bodyText);
+						
+						//txtType.setText(eventInfo.getType());
+						return contents;
+					}
+
+				});
+
+				 googleMap.addMarker(new MarkerOptions().position(new
+				 LatLng(d1, d2)).title(title).snippet(body));
+				 
+				 
+				 googleMap.setOnInfoWindowClickListener(new OnInfoWindowClickListener() {
+			            @Override
+			            public void onInfoWindowClick(Marker marker) {
+			               //Intent intent = new Intent(MapActivity.this,OtherActivity.class);
+			               //startActivity(intent);
+			            	String allText=marker.getSnippet();
+			            	String[] bodyTextArray=allText.split("(;;)");
+							String bodyText="";
+							String idText="";
+							if(bodyTextArray.length==2) {
+								bodyText=bodyTextArray[1];
+								idText=bodyTextArray[0];
+							}
+							
+							Problem problemPass=null;
+							
+							for(Problem p: probList) {
+								if(p.getProblemId().equals(idText))
+									problemPass=p;
+									
+								
+							}
+			            	
+			       
+
+							if(problemPass!=null) {
+								// Launching new Activity on selecting single List Item
+								Intent i = new Intent(getActivity(),
+										SingleListActivity.class);
+								// sending data to new activity
+								i.putExtra("description", bodyText);
+								i.putExtra("reportDate", problemPass.getReportDate());
+								i.putExtra("category", problemPass.getCategory());
+								i.putExtra("latitude", problemPass.getLatitude());
+								i.putExtra("longitude", problemPass.getLongitude());
+								i.putExtra("imagePath", problemPass.getLongitude());
+								startActivity(i);
+
+							}
+							else {
+								Toast.makeText(getActivity().getApplicationContext(), "Bir hata oluþtu.",
+										Toast.LENGTH_LONG).show();
+							}
+							
+
+			            }
+			        });
 			}
 		}
 
@@ -255,22 +393,23 @@ class JSONParser {
 				url += "?" + paramString;
 				HttpGet httpGet = new HttpGet(url);
 				HttpResponse httpResponse = httpClient.execute(httpGet);
-				Log.d("RESPONSE",""+httpResponse.getStatusLine().getStatusCode());
+				Log.d("RESPONSE", ""
+						+ httpResponse.getStatusLine().getStatusCode());
 				HttpEntity httpEntity = httpResponse.getEntity();
 				json = EntityUtils.toString(httpEntity);
 			}
 
 		} catch (UnsupportedEncodingException e) {
-			Log.e("RESPONSE","999999999999999");
+			Log.e("RESPONSE", "999999999999999");
 			e.printStackTrace();
 		} catch (ClientProtocolException e) {
-			Log.e("RESPONSE","88888888888888");
+			Log.e("RESPONSE", "88888888888888");
 			e.printStackTrace();
 		} catch (IOException e) {
-			Log.e("RESPONSE","8-777777777777777");
+			Log.e("RESPONSE", "8-777777777777777");
 			e.printStackTrace();
 		} catch (Exception e) {
-			Log.e("RESPONSE","776569801298012");
+			Log.e("RESPONSE", "776569801298012");
 			e.printStackTrace();
 		}
 

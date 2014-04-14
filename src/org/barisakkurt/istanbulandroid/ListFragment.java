@@ -166,6 +166,9 @@ public class ListFragment extends Fragment {
 					i.putExtra("description", p1.getDescription());
 					i.putExtra("reportDate", p1.getReportDate());
 					i.putExtra("category", p1.getCategory());
+					i.putExtra("latitude", p1.getLatitude());
+					i.putExtra("longitude", p1.getLongitude());
+					i.putExtra("imagePath", p1.getLongitude());
 					startActivity(i);
 				}
 			});
@@ -199,8 +202,7 @@ class ProblemAdapter extends ArrayAdapter<Problem> {
 			holder = new ViewHolder();
 			holder.category = (TextView) convertView
 					.findViewById(R.id.category);
-			holder.description = (TextView) convertView
-					.findViewById(R.id.description);
+			holder.description = (TextView) convertView.findViewById(R.id.description);
 			// holder.reportDate = (TextView)
 			// convertView.findViewById(R.id.reportDate);
 			convertView.setTag(holder);
@@ -208,7 +210,10 @@ class ProblemAdapter extends ArrayAdapter<Problem> {
 			holder = (ViewHolder) convertView.getTag();
 
 		holder.category.setText(rowItem.getCategory());
-		holder.description.setText(rowItem.getDescription());
+		if(rowItem.getDescription().length()>40)
+			holder.description.setText(rowItem.getDescription().substring(0, 40)+"...");
+		else
+			holder.description.setText(rowItem.getDescription());
 		// holder.reportDate.setText(rowItem.getReportDate());
 
 		return convertView;

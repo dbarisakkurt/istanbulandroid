@@ -2,6 +2,14 @@ package org.barisakkurt.istanbulandroid;
 
 
 class Problem {
+	private String problemId;
+	public String getProblemId() {
+		return problemId;
+	}
+
+	public void setProblemId(String problemId) {
+		this.problemId = problemId;
+	}
 	private String latitude;
 	private String longitude;
 	private String reportDate;

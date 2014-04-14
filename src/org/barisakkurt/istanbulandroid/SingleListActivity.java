@@ -14,15 +14,23 @@ public class SingleListActivity extends BaseActivity {
         TextView txtCategory = (TextView) findViewById(R.id.category);
         TextView txtDescription = (TextView) findViewById(R.id.description);
         TextView txtReportDate = (TextView) findViewById(R.id.reportDate);
+        TextView txtLatitude = (TextView) findViewById(R.id.latitude);
+        TextView txtLongitude = (TextView) findViewById(R.id.longitude);
          
         Intent i = getIntent();
         String description= i.getStringExtra("description");
         String category= i.getStringExtra("category");
         String reportDate= i.getStringExtra("reportDate");
+        String latitude= i.getStringExtra("latitude");
+        String longitude=i.getStringExtra("longitude");
+        String imagePath=i.getStringExtra("imagePath");
 
         txtCategory.setText(category);
         txtDescription.setText(description);
+        txtLatitude.setText(latitude);
+        txtLongitude.setText(longitude);
         txtReportDate.setText(reportDate);
+        
          
     }
 }

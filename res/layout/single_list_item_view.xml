@@ -4,6 +4,85 @@
   android:orientation="vertical"
   android:layout_width="match_parent"
   android:layout_height="match_parent">
+  
+    <ImageView
+        android:id="@+id/imageViewReport"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/noimage" />
+    
+    <TextView
+        android:id="@+id/textViewCatStatic"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16dp"
+        android:textStyle="bold"
+        android:text="Kategori" />
+    
+    <TextView
+        android:id="@+id/category"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="" />
+    
+    <TextView
+        android:id="@+id/textViewDescStatic"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16dp"
+        android:textStyle="bold"
+        android:text="Açıklama" />
+    
+    <TextView
+        android:id="@+id/description"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="" />
+    
+    <TextView
+        android:id="@+id/textViewCatLat"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16dp"
+        android:textStyle="bold"
+        android:text="Enlem" />
+    
+    <TextView
+        android:id="@+id/latitude"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="" />
+    
+    <TextView
+        android:id="@+id/textViewCatLong"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16dp"
+        android:textStyle="bold"
+        android:text="Boylam" />
+    
+    <TextView
+        android:id="@+id/longitude"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="" />
+    
+    <TextView
+        android:id="@+id/textViewCatReportDate"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16dp"
+        android:textStyle="bold"
+        android:text="Eklenme Tarihi" />
+    
+    <TextView
+        android:id="@+id/reportDate"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="" />
+
+<!-- 
+    
   <TextView
         android:id="@+id/category"
         android:layout_width="wrap_content"
@@ -30,5 +109,5 @@
         android:layout_toRightOf="@+id/icon"
         android:paddingLeft="10dp"
         android:textColor="#3399FF"
-        android:textSize="14dp" />
+        android:textSize="14dp" /> -->
 </LinearLayout>

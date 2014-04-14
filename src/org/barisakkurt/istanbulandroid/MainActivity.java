@@ -34,8 +34,9 @@ public class MainActivity extends BaseActivity {
 		startActivity(browserIntent);*/
 	}
 	
-	/*public void openAboutActivity(View v) {
-		Intent myIntent = new Intent(MainActivity.this, AboutActivity.class);
+	public void openAboutActivity(View v) {
+		Intent myIntent = new Intent(MainActivity.this, ProblemsActivity.class);
+		myIntent.putExtra("showButons", false);
     	MainActivity.this.startActivity(myIntent);
-	}*/
+	}
 }

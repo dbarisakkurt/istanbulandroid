@@ -84,13 +84,13 @@ public class LoginActivity extends BaseActivity {
 		protected String doInBackground(String... params) {
 			ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
 
+			Log.d("SONUC", "baris");
 			nameValuePairs.add(new BasicNameValuePair("usermail", params[0]));
 			nameValuePairs.add(new BasicNameValuePair("password", params[1]));
 
 			try {
 				HttpClient httpclient = new DefaultHttpClient();
-				HttpPost httppost = new HttpPost(
-						"http://193.140.196.117/istanbulweb/signin.php");
+				HttpPost httppost = new HttpPost(Utility.webSiteAddress+"signin.php");
 				httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 				HttpResponse response = httpclient.execute(httppost);
 				HttpEntity httpEntity = response.getEntity();
@@ -133,7 +133,7 @@ public class LoginActivity extends BaseActivity {
 					LoginActivity.this.startActivity(myIntent);
 
 				} else {
-					Toast.makeText(getApplicationContext(), result,
+					Toast.makeText(getApplicationContext(), "Kullanýcý adý veya þifreniz yanlýþ",
 							Toast.LENGTH_LONG).show();
 				}
 

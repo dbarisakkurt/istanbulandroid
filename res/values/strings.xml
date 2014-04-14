@@ -54,9 +54,6 @@
     <string name="faq_a3">Diyelim ki dışarıda yürürken yolda büyük bir çukur gördünüz. Bu çukurun kapatılması toplumun yararına olacaktır. Bu hatayı belgelendirmek ve yetkililere ulaşmasını sağlamak için uygulamaya giriş yapın. Yeni rapor düğmesine tıklayın. Çukurun fotoğrafını çekin ve ilgili bilgileri doldurup gönderin. Bu sayede İstanbul haritasına bir pin eklenecektir ve sorununuz listelenecektir. Belediye çalışanları siteye girdiğinde bunu görüp bu soruna kısa sürede bir çözüm bulabilecektir.</string>
     <string name="faq_q4">4-Uygulamanız güzel ama yerel yönetimlerle işbirliğiniz yok. Olsaydı daha iyi olmaz mıydı?</string>
     <string name="faq_a4">Evet olurdu. Bu konuyla ilgili yerel yönetimlerle görüşmelerde bulunmayı biz de isteriz.</string>
-    
-    
-    
     <string name="aboutInfo1">Sorun İstanbul projesi İstanbul kent sorunlarının bizzat İstanbullular tarafından belgelenebilmesi için yapılmış ve bunları belediyelerin dikkatine sunmayı hedefleyen bir akıllı şehir uygulamasıdır. </string>
     <string name="aboutInfo2">Sorun İstanbul projesi dahilindeki Android uygulaması ile İstanbullular kentte rasladıkları sorunların fotoğrafını çeker ve bunu haritaya ekler. İlgilenen belediyeler ise bu harita yardımıyla sorunları kolaylıkla bulabilir ve müdahale edebilir.</string>
     <string name="aboutInfo3">Yurttaşlar listelenen sorunlara oy verebilir ve böylece daha çok kişinin yaşamını olumsuz etkileyen sorunlar daha kolay ortaya çıkar ve acil sorunlara öncelik verilir.</string>
@@ -81,10 +78,13 @@
     <string name="title_activity_new_report">NewReportActivity</string>
 
     <string-array name="categoryArray">
-        <item>BOZUK YOL</item>
-        <item>ÇÖP</item>
-        <item>DİĞER</item>
-        <item>SU BASKINI</item>
+        <item>Engellilere uygun değil</item>
+        <item>Çöp dökülmüş</item>
+        <item>Yolda çukur</item>
+        <item>Su birikiyor</item>
+        <item>Yeşillikler kurumuş</item>
+        <item>Tabela kırık</item>
+        <item>Diğer</item>
     </string-array>
 
     <string name="title_activity_single_list">SingleListActivity</string>

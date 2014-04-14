@@ -1,7 +1,9 @@
 package org.barisakkurt.istanbulandroid;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -31,7 +33,7 @@ public class BaseActivity extends Activity {
 		switch (item.getItemId()) {
 
 		case R.id.menu_about:
-			openAboutActivity(null);
+			openAboutActivity();
 			return true;
 
 		case R.id.menu_contact:
@@ -52,7 +54,7 @@ public class BaseActivity extends Activity {
 
 	}
 	
-	public void openAboutActivity(View v) {
+	public void openAboutActivity() {
 		Intent myIntent = new Intent(this, AboutActivity.class);
     	startActivity(myIntent);
 	}
@@ -82,5 +84,8 @@ public class BaseActivity extends Activity {
 	    }
 	    return false;
 	}
+	
+	
+
 
 }

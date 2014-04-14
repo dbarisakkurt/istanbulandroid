@@ -55,10 +55,13 @@
     <string name="title_activity_new_report">NewReportActivity</string>
 
     <string-array name="categoryArray">
-        <item>BOZUK YOL</item>
-        <item>ÇÖP</item>
-        <item>DİĞER</item>
-        <item>SU BASKINI</item>
+        <item>Engellilere uygun değil</item>
+        <item>Çöp dökülmüş</item>
+        <item>Yolda çukur</item>
+        <item>Su birikiyor</item>
+        <item>Yeşillikler kurumuş</item>
+        <item>Tabela kırık</item>
+        <item>Diğer</item>
     </string-array>
 
     <string name="title_activity_single_list">SingleListActivity</string>

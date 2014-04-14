@@ -13,6 +13,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
 public class Utility extends Activity {
+	public static String webSiteAddress="http://188.226.204.205/istanbulweb/";
 
 	private Utility() {
 	} // private constructor

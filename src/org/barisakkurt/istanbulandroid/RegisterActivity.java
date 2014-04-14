@@ -27,6 +27,10 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 public class RegisterActivity extends BaseActivity {
+	EditText editTextNameSurname;
+	EditText editTextEmail;
+	EditText editTextPassword;
+	EditText editTextPasswordAgain;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -34,75 +38,100 @@ public class RegisterActivity extends BaseActivity {
 		setContentView(R.layout.activity_register);
 	}
 
-	public void openProblemsActivity(View v) {
-		EditText editTextNameSurname = (EditText) findViewById(R.id.editTextNameSurname);
-		EditText editTextEmail = (EditText) findViewById(R.id.editTextEmail);
-		EditText editTextPassword = (EditText) findViewById(R.id.editTextPassword);
-		EditText editTextPasswordAgain = (EditText) findViewById(R.id.editTextPasswordAgain);
+	public void registerUser(View v) {
+		editTextNameSurname = (EditText) findViewById(R.id.editTextNameSurname);
+		editTextEmail = (EditText) findViewById(R.id.editTextEmail);
+		editTextPassword = (EditText) findViewById(R.id.editTextPassword);
+		editTextPasswordAgain = (EditText) findViewById(R.id.editTextPasswordAgain);
+		
+		String strNameSurname="";
+		String strEmail="";
+		String strPassword="";
+		String strPasswordAgain="";
 
-		String strNameSurname = editTextNameSurname.getText().toString();
-		String strEmail = editTextEmail.getText().toString();
-		String strPassword = editTextPassword.getText().toString();
-		String strPasswordAgain = editTextPasswordAgain.getText().toString();
+		strNameSurname = editTextNameSurname.getText().toString();
+		strEmail = editTextEmail.getText().toString();
+		strPassword = editTextPassword.getText().toString();
+		strPasswordAgain = editTextPasswordAgain.getText().toString();
 
-		/*
-		 * if (strPassword.equals(strPasswordAgain) &&
-		 * Utility.isTextInRange(strPassword) &&
-		 * Utility.validateEmail(strEmail)) { String params[] = { strEmail,
-		 * strPassword }; new RegisterTask().execute(params); } else {
-		 * Toast.makeText(getApplicationContext(),
-		 * "E-posta ve þifreniz kriterleri karþýlamýyor.",
-		 * Toast.LENGTH_SHORT).show(); }
-		 */
+		if (strPassword.equals(strPasswordAgain)
+				&& Utility.isTextInRange(strPassword)
+				&& Utility.validateEmail(strEmail)) {
+			String params[] = { strEmail, strPassword, strNameSurname };
+			Log.d("SONUC1", "registertask oncesi");
+			new RegisterTask().execute(params);
+		} else {
+			Toast.makeText(getApplicationContext(),
+					"E-posta ve þifreniz kriterleri karþýlamýyor.",
+					Toast.LENGTH_SHORT).show();
+		}
+
 	}
 
-	/*
-	 * class RegisterTask extends AsyncTask<String, String, String> {
-	 * 
-	 * @Override protected String doInBackground(String... params) {
-	 * ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
-	 * 
-	 * nameValuePairs.add(new BasicNameValuePair("usermail", params[0]));
-	 * nameValuePairs.add(new BasicNameValuePair("password", params[1]));
-	 * 
-	 * try { HttpClient httpclient = new DefaultHttpClient(); HttpPost httppost
-	 * = new HttpPost( "http://193.140.196.117/istanbulweb/signin.php");
-	 * httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
-	 * HttpResponse response = httpclient.execute(httppost); HttpEntity
-	 * httpEntity = response.getEntity(); String status =
-	 * EntityUtils.toString(httpEntity); Log.d("SONUC", status); return status;
-	 * } catch (Exception e) { System.out.println("Error in http connection " +
-	 * e.toString()); }
-	 * 
-	 * return null; }
-	 * 
-	 * // After completing background task Dismiss the progress dialog protected
-	 * void onPostExecute(String result) { boolean validation = false;
-	 * JSONObject resultJson; // Log.d("SONUC", result); try {
-	 * 
-	 * JSONObject jsonObject = new JSONObject(result);
-	 * 
-	 * resultJson = jsonObject.getJSONObject("result"); String loginResult =
-	 * resultJson.getString("status");
-	 * 
-	 * validation = (loginResult.equals("success"));
-	 * 
-	 * if (validation) { // open activity
-	 * 
-	 * String userId = resultJson.getString("id"); String name =
-	 * resultJson.getString("name"); String mail = resultJson.getString("mail");
-	 * 
-	 * ((GlobalApplication) LoginActivity.this.getApplication())
-	 * .setUserId(userId);
-	 * 
-	 * Intent myIntent = new Intent(LoginActivity.this, ProblemsActivity.class);
-	 * myIntent.putExtra("id", userId);
-	 * LoginActivity.this.startActivity(myIntent);
-	 * 
-	 * } else { Toast.makeText(getApplicationContext(), result,
-	 * Toast.LENGTH_LONG).show(); }
-	 * 
-	 * } catch (JSONException e) { e.printStackTrace(); }
-	 */
+	class RegisterTask extends AsyncTask<String, String, String> {
 
+		@Override
+		protected String doInBackground(String... params) {
+			ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+			Log.d("SONUC1", "registertask ici1");
+			nameValuePairs.add(new BasicNameValuePair("usermail", params[0]));
+			nameValuePairs.add(new BasicNameValuePair("userpassword", params[1]));
+			nameValuePairs.add(new BasicNameValuePair("fullname", params[2]));
+			Log.d("SONUC1", "registertask ici2");
+			try {
+				HttpClient httpclient = new DefaultHttpClient();
+				HttpPost httppost = new HttpPost(Utility.webSiteAddress+"mobile_signup.php");
+				httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+				Log.d("SONUC1", "registertask ici3");
+				HttpResponse response = httpclient.execute(httppost);
+				Log.d("SONUC1", "registertask ici4");
+				HttpEntity httpEntity = response.getEntity();
+				String status = EntityUtils.toString(httpEntity);
+				Log.d("REGISTER-SONUC", status);
+				return status;
+			} catch (Exception e) {
+				System.out.println("Error in http connection " + e.toString());
+			}
+
+			return null;
+		}
+
+		protected void onPostExecute(String result) {
+			boolean validation = false;
+			JSONObject resultJson;
+			// Log.d("SONUC", result);
+			try {
+
+				JSONObject jsonObject = new JSONObject(result);
+
+				resultJson = jsonObject.getJSONObject("result");
+				String loginResult = resultJson.getString("status");
+				Log.d("ISTANBULAPP", loginResult);
+
+				validation = (loginResult.equals("success"));
+
+				if (validation) { // open activity
+
+					String userId = resultJson.getString("userid");
+
+					((GlobalApplication) RegisterActivity.this.getApplication())
+							.setUserId(userId);
+
+					Intent myIntent = new Intent(RegisterActivity.this,
+							ProblemsActivity.class);
+					myIntent.putExtra("userid", userId);
+					RegisterActivity.this.startActivity(myIntent);
+
+				} else {
+					Toast.makeText(getApplicationContext(), result,
+							Toast.LENGTH_LONG).show();
+				}
+
+			} catch (JSONException e) {
+				e.printStackTrace();
+			}
+
+		}
+
+	}
 }
