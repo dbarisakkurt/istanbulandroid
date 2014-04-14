@@ -1,5 +1,7 @@
 package org.barisakkurt.istanbulandroid;
 
+import org.barisakkurt.istanbulweb.utilty.Utility;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -30,14 +32,14 @@ public class ContactActivity extends BaseActivity {
 			  String message = textMessage.getText().toString();
  
 			  Intent email = new Intent(Intent.ACTION_SEND);
-			  email.putExtra(Intent.EXTRA_EMAIL, new String[]{ "dbarisakkurt@gmail.com"});
+			  email.putExtra(Intent.EXTRA_EMAIL, new String[]{ Utility.emailAddress });
 			  email.putExtra(Intent.EXTRA_SUBJECT, subject);
 			  email.putExtra(Intent.EXTRA_TEXT, message);
  
 			  //need this to prompts email client only
 			  email.setType("message/rfc822");
  
-			  startActivity(Intent.createChooser(email, "Choose an Email client :"));
+			  startActivity(Intent.createChooser(email, "Bir e-posta istemcisi seçin:"));
  
 			}
 		});

@@ -9,7 +9,6 @@ import android.os.Handler;
 import android.preference.PreferenceManager;
 
 public class SplashActivity extends Activity {
-
 	// Splash screen timer
 	private static int SPLASH_TIME_OUT = 1000;
 

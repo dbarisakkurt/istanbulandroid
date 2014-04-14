@@ -70,7 +70,7 @@ public class BaseActivity extends Activity {
 	}
 	
 	public void openRateApp() {
-		Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.google.com"));
+		Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/search?q=sorun%20istanbul"));
 		startActivity(browserIntent);
 	}
 	

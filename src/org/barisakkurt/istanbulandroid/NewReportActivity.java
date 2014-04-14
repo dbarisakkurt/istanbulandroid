@@ -26,6 +26,7 @@ import org.apache.http.entity.mime.content.FileBody;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.params.CoreProtocolPNames;
+import org.barisakkurt.istanbulweb.utilty.Utility;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -52,7 +53,7 @@ import android.widget.Toast;
 public class NewReportActivity extends BaseActivity {
 	private static final int CAMERA_REQUEST = 1888;
 	private ImageView imageView;
-	String filePath = "/storage/emulated/0/DCIM/Camera/";
+	String filePath = Utility.imageFolder;
 	String userId;
 	EditText edtAddress, edtDescription;
 
@@ -98,7 +99,7 @@ public class NewReportActivity extends BaseActivity {
 				.format(new Date());
 		cameraIntent.putExtra(
 				android.provider.MediaStore.EXTRA_OUTPUT,
-				Uri.fromFile(new File("/storage/emulated/0/DCIM/Camera/"
+				Uri.fromFile(new File(filePath
 						+ "IMG_" + timeStamp + ".jpg")));
 
 		startActivityForResult(cameraIntent, CAMERA_REQUEST);

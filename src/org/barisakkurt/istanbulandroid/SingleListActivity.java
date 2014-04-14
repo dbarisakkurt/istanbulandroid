@@ -30,7 +30,5 @@ public class SingleListActivity extends BaseActivity {
         txtLatitude.setText(latitude);
         txtLongitude.setText(longitude);
         txtReportDate.setText(reportDate);
-        
-         
     }
 }

@@ -12,7 +12,4 @@ public class GlobalApplication extends Application {
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
-	
-	
-
 }

@@ -20,7 +20,6 @@ import android.widget.Button;
 @SuppressLint("NewApi")
 public class ProblemsActivity extends FragmentActivity implements
 		ActionBar.TabListener {
-
 	private ViewPager viewPager;
 	private TabsPagerAdapter mAdapter;
 	private ActionBar actionBar;
@@ -42,26 +41,6 @@ public class ProblemsActivity extends FragmentActivity implements
 			Log.d("REGISTER_SONRA", a);
 		}
 
-		/*
-		 * View view = infliater.inflate(R.layout.map_tab, container, false);
-		 * //ImageView imageView = (ImageView)
-		 * view.findViewById(R.id.imageView1);
-		 * //imageView.setImageResource(imageResourceId);
-		 * //imageView.setBackgroundResource(imageResourceId);
-		 * 
-		 * Button button = (Button) view.findViewById(R.id.btn1);
-		 */
-
-		/*
-		 * left=(Button) findViewById(R.id.buttonSendNewProblem);
-		 * middle=(Button) findViewById(R.id.buttonShowNearestProblems);
-		 * right=(Button) findViewById(R.id.closeButton);
-		 * 
-		 * if(showButtons==false) { left.setVisibility(View.INVISIBLE);
-		 * right.setVisibility(View.INVISIBLE);
-		 * middle.setVisibility(View.INVISIBLE); }
-		 */
-
 		// Initilization
 		viewPager = (ViewPager) findViewById(R.id.pager);
 		actionBar = getActionBar();
@@ -81,8 +60,7 @@ public class ProblemsActivity extends FragmentActivity implements
 		viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
 			@Override
 			public void onPageSelected(int position) {
-				// on changing the page
-				// make respected tab selected
+				// on changing the page make respected tab selected
 				actionBar.setSelectedNavigationItem(position);
 			}
 
@@ -133,8 +111,6 @@ public class ProblemsActivity extends FragmentActivity implements
 		LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
 
 		if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
-			// Toast.makeText(this, "GPS is Enabled in your devide",
-			// Toast.LENGTH_SHORT).show();
 			Intent myIntent = new Intent(ProblemsActivity.this,
 					NewReportActivity.class);
 			ProblemsActivity.this.startActivity(myIntent);

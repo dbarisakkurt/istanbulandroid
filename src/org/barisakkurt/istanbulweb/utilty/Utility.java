@@ -8,12 +8,19 @@ import java.net.URLConnection;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Environment;
 
+@SuppressLint("NewApi")
 public class Utility extends Activity {
-	public static String webSiteAddress="http://188.226.204.205/istanbulweb/";
+	public static final String webSiteAddress="http://188.226.204.205/istanbulweb/";
+	public static final String emailAddress="dbarisakkurt@gmail.com";
+	//public static final String imageFolder="/storage/emulated/0/DCIM/Camera/";
+	@SuppressLint("NewApi")
+	public static final String imageFolder=Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM).toString()+"/Camera/";
 
 	private Utility() {
 	} // private constructor

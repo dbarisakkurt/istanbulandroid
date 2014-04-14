@@ -15,11 +15,14 @@ import org.barisakkurt.istanbulweb.utilty.Utility;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Environment;
 import android.preference.PreferenceManager;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
@@ -32,10 +35,15 @@ public class LoginActivity extends BaseActivity {
 	EditText editTextPassword;
 	CheckBox checkBoxRemember;
 
+	@SuppressLint("NewApi")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_login);
+		
+		Log.d("RESIM", "Dizin:"+MediaStore.Images.Media.DATA);
+		Log.d("RESIM", Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM).toString());
+
 		
 		editTextUsername = (EditText) findViewById(R.id.editTextUsername);
 		editTextPassword = (EditText) findViewById(R.id.editTextPassword);

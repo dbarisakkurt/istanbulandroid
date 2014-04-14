@@ -19,6 +19,7 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.utils.URLEncodedUtils;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
+import org.barisakkurt.istanbulweb.utilty.Utility;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -51,18 +52,13 @@ import com.google.android.gms.maps.model.MarkerOptions;
 public class MapFragment extends Fragment {
 	JSONArray problems = null;
 	ArrayList<HashMap<String, String>> problemsList;
-	// Creating JSON Parser object
 	JSONParser jParser = new JSONParser();
 	public List<Problem> probList;
 	public Set<Problem> problemSet = new HashSet<Problem>();
 	Button left, right, middle;
-	
-	
-
-	// Progress Dialog
 	private ProgressDialog pDialog;
-	private String serverUrl = "http://193.140.196.117/istanbulweb/";
-	private String urlAllProblems = "http://193.140.196.117/istanbulweb/loadBasicProblems.php";
+	private String serverUrl = Utility.webSiteAddress;
+	private String urlAllProblems = Utility.webSiteAddress+"loadBasicProblems.php";
 	private static final String TAG_LATITUDE = "latitude";
 	private static final String TAG_LONGITUDE = "longitude";
 	private static final String TAG_PHOTO = "photo";
@@ -70,25 +66,18 @@ public class MapFragment extends Fragment {
 	private static final String TAG_REPORTDATE = "reportdate";
 	private static final String TAG_CATEGORY = "category";
 	private static final String TAG_PROBLEM_ID = "problemid";
-
 	public GoogleMap googleMap;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		
 		boolean showBut=((ProblemsActivity)this.getActivity()).showButtons;
-
 
 		View rootView = inflater.inflate(R.layout.map_tab, container, false);
 		
-		Log.d("LEFT1", showBut+"");
 		left=(Button) rootView.findViewById(R.id.buttonSendNewProblem);
-		Log.d("LEFT2", left.toString());
 		middle=(Button) rootView.findViewById(R.id.buttonShowNearestProblems);
 		right=(Button) rootView.findViewById(R.id.closeButton);
-		
-		
 
 		if(showBut==false) {
 			left.setVisibility(View.INVISIBLE);
@@ -96,7 +85,6 @@ public class MapFragment extends Fragment {
 			right.setVisibility(View.INVISIBLE);
 		}
 		
-
 		try {
 			// Loading map
 			initilizeMap();
@@ -118,7 +106,7 @@ public class MapFragment extends Fragment {
 
 			// check if map is created successfully or not
 			if (googleMap == null) {
-				Toast.makeText(getActivity(), "Sorry! unable to create maps",
+				Toast.makeText(getActivity(), "Üzgünüm! Ne yazýk ki haritayý oluþturamadým.",
 						Toast.LENGTH_SHORT).show();
 			} else {
 				new LoadAllProducts(this).execute();
@@ -139,7 +127,6 @@ public class MapFragment extends Fragment {
 		super.onAttach(activity);
 	}
 
-	// /////////////////////////////////////////////////////////////////////////
 	// Background Async Task to Load all product by making HTTP Request
 	class LoadAllProducts extends AsyncTask<String, String, String> {
 		public List<Problem> pList = new ArrayList<Problem>();
@@ -162,32 +149,21 @@ public class MapFragment extends Fragment {
 
 		// getting All products from url
 		protected String doInBackground(String... args) {
-			// Building Parameters
 			List<NameValuePair> params = new ArrayList<NameValuePair>();
-			// getting JSON string from URL
 			JSONObject json = jParser.makeHttpRequest(urlAllProblems, "GET",
 					params);
 
-			// Check your log cat for JSON reponse
-			Log.d("All Products: ", json.toString());
-
 			try {
-				// Log.d("BARIS", Integer.toString(success));
 				if (!json.isNull("problems")) {
 					// products found
 					// Getting Array of Products
 					problems = json.getJSONArray("problems");
-					Log.d("BARIS", Integer.toString(problems.length()));
 
 					// looping through All Products
 					for (int i = 0; i < problems.length(); i++) {
 						JSONObject c = problems.getJSONObject(i);
 
-						Log.d("iiiiiiiiiiiiiii", "i=" + Integer.toString(i));
-						// Storing each json item in variable
-
 						String latitude = c.getString(TAG_LATITUDE);
-						Log.d("LATTTTTTTTTTTTTT=", "" + latitude);
 						String longitude = c.getString(TAG_LONGITUDE);
 						String photo = c.getString(TAG_PHOTO);
 						String description = c.getString(TAG_DESCRIPTION);
@@ -211,7 +187,6 @@ public class MapFragment extends Fragment {
 					// no products found Launch Add New product Activity
 				}
 			} catch (JSONException e) {
-				Log.e("RESPONSE", "RESPONSIVE RESPONSE");
 				e.printStackTrace();
 			}
 			return null;
@@ -244,11 +219,7 @@ public class MapFragment extends Fragment {
 				
 				String body=probList.get(i).getProblemId()+";;";
 				body += probList.get(i).getDescription();
-				
 
-					
-
-				
 				googleMap.setInfoWindowAdapter(new InfoWindowAdapter() {
 					private final View contents = getActivity().getLayoutInflater().inflate(
 							R.layout.map_marker, null);
@@ -267,8 +238,7 @@ public class MapFragment extends Fragment {
 						String title = marker.getTitle();
 						String body=marker.getSnippet();
 						//String markerId=marker.get
-						
-						
+
 						String[] bodyTextArray=body.split("(;;)");
 						String bodyText="";
 						String idText="";
@@ -324,12 +294,8 @@ public class MapFragment extends Fragment {
 							for(Problem p: probList) {
 								if(p.getProblemId().equals(idText))
 									problemPass=p;
-									
-								
 							}
 			            	
-			       
-
 							if(problemPass!=null) {
 								// Launching new Activity on selecting single List Item
 								Intent i = new Intent(getActivity(),
@@ -348,8 +314,6 @@ public class MapFragment extends Fragment {
 								Toast.makeText(getActivity().getApplicationContext(), "Bir hata oluþtu.",
 										Toast.LENGTH_LONG).show();
 							}
-							
-
 			            }
 			        });
 			}
@@ -374,7 +338,6 @@ class JSONParser {
 
 		// Making HTTP request
 		try {
-
 			// check for request method
 			if (method == "POST") {
 				// request method is POST
@@ -400,16 +363,12 @@ class JSONParser {
 			}
 
 		} catch (UnsupportedEncodingException e) {
-			Log.e("RESPONSE", "999999999999999");
 			e.printStackTrace();
 		} catch (ClientProtocolException e) {
-			Log.e("RESPONSE", "88888888888888");
 			e.printStackTrace();
 		} catch (IOException e) {
-			Log.e("RESPONSE", "8-777777777777777");
 			e.printStackTrace();
 		} catch (Exception e) {
-			Log.e("RESPONSE", "776569801298012");
 			e.printStackTrace();
 		}
 
