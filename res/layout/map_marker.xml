@@ -5,9 +5,10 @@
 
     <ImageView
         android:id="@+id/ivInfoWindowMain"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="200dip"
+        android:layout_height="200dip"
         android:layout_marginRight="5dp"
+        android:contentDescription="Resim"
         android:adjustViewBounds="true"
         android:src="@drawable/ic_launcher" >
     </ImageView>

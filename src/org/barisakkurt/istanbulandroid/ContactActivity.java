@@ -7,12 +7,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 
 public class ContactActivity extends BaseActivity {
 	Button buttonSend;
 	EditText textSubject;
 	EditText textMessage;
+	CheckBox checkboxDeviceInfo;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -22,9 +24,9 @@ public class ContactActivity extends BaseActivity {
 		buttonSend = (Button) findViewById(R.id.buttonSend);
 		textSubject = (EditText) findViewById(R.id.editTextSubject);
 		textMessage = (EditText) findViewById(R.id.editTextMessage);
+		checkboxDeviceInfo=(CheckBox) findViewById(R.id.checkBoxDeviceInfo);
  
 		buttonSend.setOnClickListener(new OnClickListener() {
- 
 			@Override
 			public void onClick(View v) {
  
@@ -34,12 +36,21 @@ public class ContactActivity extends BaseActivity {
 			  Intent email = new Intent(Intent.ACTION_SEND);
 			  email.putExtra(Intent.EXTRA_EMAIL, new String[]{ Utility.emailAddress });
 			  email.putExtra(Intent.EXTRA_SUBJECT, subject);
+			  
+			  
+			  if(checkboxDeviceInfo.isChecked()) {
+				  message+="\nOS Version:"+System.getProperty("os.version")+"\n";
+				  message+="OS API Level:"+android.os.Build.VERSION.SDK_INT+"\n";
+				  message+="Device:"+android.os.Build.DEVICE +"\n";
+				  message+="Model:"+android.os.Build.MODEL +"\n";
+				  message+="Product:"+android.os.Build.PRODUCT +"\n";          
+			  }
 			  email.putExtra(Intent.EXTRA_TEXT, message);
  
 			  //need this to prompts email client only
 			  email.setType("message/rfc822");
  
-			  startActivity(Intent.createChooser(email, "Bir e-posta istemcisi seçin:"));
+			  startActivity(Intent.createChooser(email, getString(R.string.select_email_client)));
  
 			}
 		});

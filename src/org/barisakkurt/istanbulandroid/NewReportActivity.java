@@ -1,7 +1,5 @@
 package org.barisakkurt.istanbulandroid;
 
-//193.140.196.117
-
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
@@ -51,12 +49,12 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 public class NewReportActivity extends BaseActivity {
+	//1888 is arbitrary see here http://stackoverflow.com/questions/16775427/android-camera-intent-not-working-launching-gallery-instead
 	private static final int CAMERA_REQUEST = 1888;
 	private ImageView imageView;
 	String filePath = Utility.imageFolder;
 	String userId;
 	EditText edtAddress, edtDescription;
-
 	String timeStamp;
 	private static final int CAMERA_CAPTURE_IMAGE_REQUEST_CODE = 100;
 	private static final int CAMERA_CAPTURE_VIDEO_REQUEST_CODE = 200;
@@ -74,18 +72,13 @@ public class NewReportActivity extends BaseActivity {
 		spinner = (Spinner) findViewById(R.id.categorySpinner);
 		editTextLat = (EditText) findViewById(R.id.editTextLatitude1);
 		editTextLong = (EditText) findViewById(R.id.editTextLongitude1);
-		
 		edtAddress = (EditText) findViewById(R.id.editTextAddress);
 		edtDescription = (EditText) findViewById(R.id.editTextDescription);
-
 		userId = ((GlobalApplication) getApplication()).getUserId();
-
 		buttonSubmit = (Button) findViewById(R.id.btnSubmit);
 		buttonSubmit.setEnabled(false);
 
-		//Spinner spinner = (Spinner) findViewById(R.id.categorySpinner);
-		// Create an ArrayAdapter using the string array and a default spinner
-		// layout
+		// Create an ArrayAdapter and a default spinner layout
 		ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
 				this, R.array.categoryArray,
 				android.R.layout.simple_spinner_item);
@@ -113,26 +106,30 @@ public class NewReportActivity extends BaseActivity {
 			try {
 				ImageView imgPreview = (ImageView) findViewById(R.id.problemImage);
 				imgPreview.setVisibility(View.VISIBLE);
+				
+				Log.d("onActivityResult", "onActivityResult1");
 
 				// bimatp factory
 				BitmapFactory.Options options = new BitmapFactory.Options();
 
-				// downsizing image as it throws OutOfMemory Exception for
-				// larger
-				// images
+				// downsize image as it throws OutOfMemory Exception
 				options.inSampleSize = 8;
 				Uri fileUri = getOutputMediaFileUri(1);
 
 				final Bitmap bitmap = BitmapFactory.decodeFile(
 						fileUri.getPath(), options);
+				
+				Log.d("onActivityResult", "onActivityResult2");
+				Log.d("onActivityResult", "onActivityResult2,5--"+fileUri.getPath());
+				
+				if(bitmap!=null) {
+					imgPreview.setImageBitmap(bitmap);
+					buttonSubmit.setEnabled(true);
+					
+					Log.d("onActivityResult", "onActivityResult3-bitmap null degil");
+				}
 
-				imgPreview.setImageBitmap(bitmap);
-
-				buttonSubmit.setEnabled(true);
-				
-				
-				
-				
+				//get location info
 				LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 				Location location = lm
 						.getLastKnownLocation(LocationManager.GPS_PROVIDER);
@@ -156,23 +153,27 @@ public class NewReportActivity extends BaseActivity {
 
 	private File getOutputMediaFile(int type) {
 		// mediaStorageDir=Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
-		File mediaStorageDir = new File("/storage/emulated/0/DCIM/Camera/");
+		File mediaStorageDir = new File(filePath);
+		
+		Log.d("onActivityResult", "onActivityResult4"+mediaStorageDir.getPath());
 
 		// Create the storage directory if it does not exist
 		if (!mediaStorageDir.exists()) {
 			if (!mediaStorageDir.mkdirs()) {
-				Log.d("DIZIN", "Dizin yaratýlamadý.");
+				Log.d("DIZIN", "Cannot create folder");
 				return null;
 			}
 		}
 
 		File mediaFile;
 		if (type == 1) {
+			Log.d("onActivityResult", "type=1");
 			// timeStamp="20131220_220518";
 			mediaFile = new File(mediaStorageDir.getPath() + File.separator
 					+ "IMG_" + timeStamp + ".jpg");
 			filePath = mediaFile.toString();
 		} else {
+			Log.d("onActivityResult", "null donecek");
 			return null;
 		}
 
@@ -187,10 +188,6 @@ public class NewReportActivity extends BaseActivity {
 		LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 		Location location = lm
 				.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-
-		
-		
-		
 		finish();
 		
 		try {
@@ -201,7 +198,7 @@ public class NewReportActivity extends BaseActivity {
 	}
 
 	public void upload(String filepath) throws IOException {
-		String url = "http://193.140.196.117/istanbulweb/addProblem.php";
+		String url = Utility.webSiteAddress+"addProblem.php";
 		HttpClient httpclient = new DefaultHttpClient();
 		httpclient.getParams().setParameter(
 				CoreProtocolPNames.PROTOCOL_VERSION, HttpVersion.HTTP_1_1);
@@ -214,7 +211,6 @@ public class NewReportActivity extends BaseActivity {
 		System.out.println("executing request " + httppost.getRequestLine());
 		HttpResponse response = httpclient.execute(httppost);
 		HttpEntity resEntity = response.getEntity();
-		// check the response and do what is required
 	}
 
 	class UploadReport extends AsyncTask<String, String, String> {
@@ -226,9 +222,7 @@ public class NewReportActivity extends BaseActivity {
 			String res = "";
 			StringBuffer buffer = new StringBuffer();
 			inputStream = response.getEntity().getContent();
-			int contentLength = (int) response.getEntity().getContentLength(); // getting
-																				// content
-																				// length…..
+			int contentLength = (int) response.getEntity().getContentLength();
 			Toast.makeText(NewReportActivity.this,
 					"contentLength : " + contentLength, Toast.LENGTH_LONG)
 					.show();
@@ -238,27 +232,20 @@ public class NewReportActivity extends BaseActivity {
 				int len = 0;
 				try {
 					while (-1 != (len = inputStream.read(data))) {
-						buffer.append(new String(data, 0, len)); // converting
-																	// to string
-																	// and
-																	// appending
-																	// to
-																	// stringbuffer…..
+						buffer.append(new String(data, 0, len));
 					}
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
 				try {
-					inputStream.close(); // closing the stream…..
+					inputStream.close();
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
-				res = buffer.toString(); // converting stringbuffer to string…..
+				res = buffer.toString();
 
 				Toast.makeText(NewReportActivity.this, "Result : " + res,
 						Toast.LENGTH_LONG).show();
-				// System.out.println("Response => " +
-				// EntityUtils.toString(response.getEntity()));
 			}
 			return res;
 		}
@@ -269,12 +256,7 @@ public class NewReportActivity extends BaseActivity {
 
 			Bitmap bitmap = BitmapFactory.decodeFile(params[0]);
 			ByteArrayOutputStream stream = new ByteArrayOutputStream();
-			bitmap.compress(Bitmap.CompressFormat.JPEG, 90, stream); // compress
-																		// to
-																		// which
-																		// format
-																		// you
-																		// want.
+			bitmap.compress(Bitmap.CompressFormat.JPEG, 90, stream);
 			byte[] byte_arr = stream.toByteArray();
 			String image_str = Base64.encodeToString(byte_arr, Base64.DEFAULT);
 			ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
@@ -320,7 +302,7 @@ public class NewReportActivity extends BaseActivity {
 			try {
 				HttpClient httpclient = new DefaultHttpClient();
 				HttpPost httppost = new HttpPost(
-						"http://193.140.196.117/istanbulweb/addProblem.php");
+						Utility.webSiteAddress+"addProblem.php");
 				httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 				HttpResponse response = httpclient.execute(httppost);
 				String the_string_response = convertResponseToString(response);

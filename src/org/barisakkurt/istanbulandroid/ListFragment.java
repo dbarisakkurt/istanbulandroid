@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.http.NameValuePair;
+import org.barisakkurt.istanbulweb.utilty.Utility;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -15,20 +16,22 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import com.androidquery.AQuery;
 
 public class ListFragment extends Fragment {
 	JSONArray problems = null;
-	private String urlAllProblems = "http://193.140.196.117/istanbulweb/loadBasicProblems.php";
+	private String urlAllProblems = Utility.webSiteAddress
+			+ "loadBasicProblems.php";
 	JSONParser jParser = new JSONParser();
 	ListFragment activity;
 	private static final String TAG_LATITUDE = "latitude";
@@ -57,7 +60,7 @@ public class ListFragment extends Fragment {
 	@Override
 	public void onResume() {
 		super.onResume();
-		//refrest listview
+		// refrest listview
 		ListView lv = (ListView) getActivity().findViewById(R.id.list);
 		lv.invalidateViews();
 	}
@@ -113,7 +116,7 @@ public class ListFragment extends Fragment {
 					for (int i = 0; i < problems.length(); i++) {
 						JSONObject c = problems.getJSONObject(i);
 
-						Log.d("iiiiiiiiiiiiiii", "i=" + Integer.toString(i));
+						Log.d("RESIM", "c=" + c.toString());
 						// Storing each json item in variable
 
 						String latitude = c.getString(TAG_LATITUDE);
@@ -128,6 +131,7 @@ public class ListFragment extends Fragment {
 								reportDate);
 						tempProblem.setCategory(category);
 						tempProblem.setDescription(description);
+						tempProblem.setImagePath(photo);
 
 						// tempProblem.setImagePath(photo);
 						pList.add(tempProblem);
@@ -168,7 +172,7 @@ public class ListFragment extends Fragment {
 					i.putExtra("category", p1.getCategory());
 					i.putExtra("latitude", p1.getLatitude());
 					i.putExtra("longitude", p1.getLongitude());
-					i.putExtra("imagePath", p1.getLongitude());
+					i.putExtra("imagePath", p1.getImagePath());
 					startActivity(i);
 				}
 			});
@@ -188,7 +192,7 @@ class ProblemAdapter extends ArrayAdapter<Problem> {
 	private class ViewHolder {
 		TextView category;
 		TextView description;
-		TextView reportDate;
+		ImageView image;
 	}
 
 	public View getView(int position, View convertView, ViewGroup parent) {
@@ -202,21 +206,36 @@ class ProblemAdapter extends ArrayAdapter<Problem> {
 			holder = new ViewHolder();
 			holder.category = (TextView) convertView
 					.findViewById(R.id.category);
-			holder.description = (TextView) convertView.findViewById(R.id.description);
-			// holder.reportDate = (TextView)
-			// convertView.findViewById(R.id.reportDate);
+			holder.description = (TextView) convertView
+					.findViewById(R.id.description);
+
+			holder.image = (ImageView) convertView.findViewById(R.id.list_image);
+			Log.d("RESIM", Utility.webSiteAddress + rowItem.getImagePath());
+
+			holder.image
+					.setTag(Utility.webSiteAddress + rowItem.getImagePath());
+			
+
+			AQuery aq = new AQuery(convertView);
+            aq.id(R.id.list_image).image( Utility.webSiteAddress + rowItem.getImagePath(), true, true, 0, 0, null, AQuery.FADE_IN_NETWORK, 1.0f);
+		
+
 			convertView.setTag(holder);
 		} else
 			holder = (ViewHolder) convertView.getTag();
 
 		holder.category.setText(rowItem.getCategory());
-		if(rowItem.getDescription().length()>40)
-			holder.description.setText(rowItem.getDescription().substring(0, 40)+"...");
+		if (rowItem.getDescription().length() > 40)
+			holder.description.setText(rowItem.getDescription()
+					.substring(0, 40) + "...");
 		else
 			holder.description.setText(rowItem.getDescription());
 		// holder.reportDate.setText(rowItem.getReportDate());
 
 		return convertView;
-	}
+	
 
+	}
+	
+	
 }

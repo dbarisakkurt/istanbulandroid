@@ -4,40 +4,47 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical" >
-  
+
     <TextView
         android:id="@+id/textViewSubject"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Subject : "
+        android:text="@string/subject"
         android:textAppearance="?android:attr/textAppearanceLarge" />
- 
+
     <EditText
         android:id="@+id/editTextSubject"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-         >
+        android:hint="@string/message_hint" >
     </EditText>
- 
+
     <TextView
         android:id="@+id/textViewMessage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Message : "
+        android:text="@string/message"
         android:textAppearance="?android:attr/textAppearanceLarge" />
- 
+
     <EditText
         android:id="@+id/editTextMessage"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:gravity="top"
+        android:hint="@string/message_content_hint"
         android:inputType="textMultiLine"
         android:lines="5" />
- 
+
+    <CheckBox
+        android:id="@+id/checkBoxDeviceInfo"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/send_device_info" />
+
     <Button
         android:id="@+id/buttonSend"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="Send" />
- 
+        android:text="@string/send" />
+
 </LinearLayout>

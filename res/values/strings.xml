@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Sorun İstanbul</string>
+    <string name="image">Image</string>
+<string name="app_name">Sorun İstanbul</string>
     <string name="action_settings">Setings</string>
     <string name="settings">Setings</string>
     <string name="contact">Contact</string>
@@ -12,8 +13,13 @@
     <string name="longitude">Longitude</string>
     <string name="register">Register</string>
     <string name="login">Login</string>
+    <string name="subject">Subject</string>
+    <string name="message">Message</string>
     <string name="title_activity_login">Login</string>
     <string name="loginYourAccount">Login to your account</string>
+    <string name="send_device_info">Send my device information</string>
+    <string name="message_hint">Your message\'s subject</string>
+    <string name="message_content_hint">Your message content</string>
     <string name="username">Username</string>
     <string name="password">Password</string>
     <string name="remember_me">Remember me</string>
@@ -33,11 +39,14 @@
     <string name="title_activity_problems">Problems</string>
     <string name="projectName">Sorun İstanbul</string>
     <string name="proejctMotto">Solutions to Istanbul\'s Problems</string>
-    <string name="namesurname">Name Surname</string>
+    <string name="namesurname">Name and Surname</string>
     <string name="email">E-mail</string>
     <string name="submit">Submit</string>
     <string name="clear">Clear</string>
     <string name="cancel">Cancel</string>
+    <string name="internet_connection_required">This app requires an interne connection. Please verify that you are online.</string>
+    <string name="wrong_username_password">Wrong username or password.</string>
+    <string name="select_email_client">Please select your e-mail client.</string>
     <string name="gui">GUI</string>
     <string name="faq">Sıkça Sorulan Sorular</string>
     <string name="developers">Geliştiriciler</string>

@@ -2,27 +2,25 @@ package org.barisakkurt.istanbulandroid;
 
 import java.util.List;
 
-import android.annotation.SuppressLint;
-import android.app.ActionBar;
-import android.app.ActionBar.Tab;
 import android.app.AlertDialog;
-import android.app.FragmentTransaction;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.location.LocationManager;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBar.Tab;
+import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
-@SuppressLint("NewApi")
-public class ProblemsActivity extends FragmentActivity implements
+//@SuppressLint("NewApi")
+public class ProblemsActivity extends ActionBarActivity  implements
 		ActionBar.TabListener {
 	private ViewPager viewPager;
 	private TabsPagerAdapter mAdapter;
-	private ActionBar actionBar;
+	private android.support.v7.app.ActionBar actionBar;
 	private String[] tabs = { "Harita", "Liste" };
 	private String userId;
 	Button left, middle, right;
@@ -43,7 +41,8 @@ public class ProblemsActivity extends FragmentActivity implements
 
 		// Initilization
 		viewPager = (ViewPager) findViewById(R.id.pager);
-		actionBar = getActionBar();
+		//actionBar = getActionBar();
+		actionBar=getSupportActionBar();
 		mAdapter = new TabsPagerAdapter(getSupportFragmentManager());
 
 		viewPager.setAdapter(mAdapter);
@@ -88,7 +87,7 @@ public class ProblemsActivity extends FragmentActivity implements
 			}
 		}
 	}
-
+/*
 	@Override
 	public void onTabReselected(Tab tab, FragmentTransaction ft) {
 	}
@@ -101,7 +100,7 @@ public class ProblemsActivity extends FragmentActivity implements
 
 	@Override
 	public void onTabUnselected(Tab tab, FragmentTransaction ft) {
-	}
+	}*/
 
 	public void closeApp(View v) {
 		finish();
@@ -156,5 +155,26 @@ public class ProblemsActivity extends FragmentActivity implements
 				});
 		AlertDialog alert = alertDialogBuilder.create();
 		alert.show();
+	}
+
+	@Override
+	public void onTabReselected(Tab arg0,
+			android.support.v4.app.FragmentTransaction arg1) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onTabSelected(Tab tab,
+			android.support.v4.app.FragmentTransaction arg1) {
+		viewPager.setCurrentItem(tab.getPosition());
+		
+	}
+
+	@Override
+	public void onTabUnselected(Tab arg0,
+			android.support.v4.app.FragmentTransaction arg1) {
+		// TODO Auto-generated method stub
+		
 	}
 }

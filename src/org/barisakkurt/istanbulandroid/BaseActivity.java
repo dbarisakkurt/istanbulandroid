@@ -1,9 +1,7 @@
 package org.barisakkurt.istanbulandroid;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -11,7 +9,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 
 public class BaseActivity extends Activity {
 
@@ -26,7 +23,7 @@ public class BaseActivity extends Activity {
 		getMenuInflater().inflate(R.menu.base, menu);
 		return true;
 	}
-	
+
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 
@@ -43,7 +40,7 @@ public class BaseActivity extends Activity {
 		case R.id.menu_rate_app:
 			openRateApp();
 			return true;
-			
+
 		case R.id.menu_settings:
 			openSettingsActivity();
 			return true;
@@ -53,39 +50,36 @@ public class BaseActivity extends Activity {
 		}
 
 	}
-	
+
 	public void openAboutActivity() {
 		Intent myIntent = new Intent(this, AboutActivity.class);
-    	startActivity(myIntent);
+		startActivity(myIntent);
 	}
-	
+
 	public void openSettingsActivity() {
 		Intent myIntent = new Intent(this, SettingsActivity.class);
-    	startActivity(myIntent);
+		startActivity(myIntent);
 	}
-	
+
 	public void openContactActivity() {
 		Intent myIntent = new Intent(this, ContactActivity.class);
-    	startActivity(myIntent);
+		startActivity(myIntent);
 	}
-	
+
 	public void openRateApp() {
-		Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/search?q=sorun%20istanbul"));
+		Intent browserIntent = new Intent(
+				Intent.ACTION_VIEW,
+				Uri.parse("https://play.google.com/store/search?q=sorun%20istanbul"));
 		startActivity(browserIntent);
 	}
-	
-	//returns true if device is online
+
+	// returns true if device is online
 	public boolean isOnline() {
-	    ConnectivityManager cm =
-	        (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-	    NetworkInfo netInfo = cm.getActiveNetworkInfo();
-	    if (netInfo != null && netInfo.isConnectedOrConnecting()) {
-	        return true;
-	    }
-	    return false;
+		ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+		NetworkInfo netInfo = cm.getActiveNetworkInfo();
+		if (netInfo != null && netInfo.isConnectedOrConnecting()) {
+			return true;
+		}
+		return false;
 	}
-	
-	
-
-
 }

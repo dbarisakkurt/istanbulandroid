@@ -16,16 +16,18 @@ import android.os.Environment;
 
 @SuppressLint("NewApi")
 public class Utility extends Activity {
-	public static final String webSiteAddress="http://188.226.204.205/istanbulweb/";
-	public static final String emailAddress="dbarisakkurt@gmail.com";
-	//public static final String imageFolder="/storage/emulated/0/DCIM/Camera/";
+	public static final String webSiteAddress = "http://188.226.204.205/istanbulweb/";
+	public static final String emailAddress = "dbarisakkurt@gmail.com";
 	@SuppressLint("NewApi")
-	public static final String imageFolder=Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM).toString()+"/Camera/";
+	public static final String imageFolder = Environment
+			.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM)
+			.toString()
+			+ "/Camera/";
 
 	private Utility() {
 	} // private constructor
 
-	// is text has min 6 max 18 chars
+	// is text has minimum 6 max 18 chars
 	public static boolean isTextInRange(String text) {
 		if (text.length() < 6)
 			return false;
@@ -34,7 +36,7 @@ public class Utility extends Activity {
 		return true;
 	}
 
-	//returns true if it is a valid email address
+	// returns true if it is a valid email address
 	public static boolean validateEmail(final String hex) {
 		final String EMAIL_PATTERN = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
 				+ "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
@@ -43,36 +45,35 @@ public class Utility extends Activity {
 		Matcher matcher = pattern.matcher(hex);
 		return matcher.matches();
 	}
-	
+
 	public static Bitmap loadBitmap(String URL, BitmapFactory.Options options) {
-        Bitmap bitmap = null;
-        InputStream in = null;
-        try {
-            in = OpenHttpConnection(URL);
-            bitmap = BitmapFactory.decodeStream(in, null, options);
-            in.close();
-        } catch (IOException e1) {
-        }
-        return bitmap;
-    }
-	
+		Bitmap bitmap = null;
+		InputStream in = null;
+		try {
+			in = OpenHttpConnection(URL);
+			bitmap = BitmapFactory.decodeStream(in, null, options);
+			in.close();
+		} catch (IOException e1) {
+		}
+		return bitmap;
+	}
+
 	private static InputStream OpenHttpConnection(String strURL)
-            throws IOException {
-        InputStream inputStream = null;
-        URL url = new URL(strURL);
-        URLConnection conn = url.openConnection();
+			throws IOException {
+		InputStream inputStream = null;
+		URL url = new URL(strURL);
+		URLConnection conn = url.openConnection();
 
-        try {
-            HttpURLConnection httpConn = (HttpURLConnection) conn;
-            httpConn.setRequestMethod("GET");
-            httpConn.connect();
+		try {
+			HttpURLConnection httpConn = (HttpURLConnection) conn;
+			httpConn.setRequestMethod("GET");
+			httpConn.connect();
 
-            if (httpConn.getResponseCode() == HttpURLConnection.HTTP_OK) {
-                inputStream = httpConn.getInputStream();
-            }
-        } catch (Exception ex) {
-        }
-        return inputStream;
-    }
-
+			if (httpConn.getResponseCode() == HttpURLConnection.HTTP_OK) {
+				inputStream = httpConn.getInputStream();
+			}
+		} catch (Exception ex) {
+		}
+		return inputStream;
+	}
 }

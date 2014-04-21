@@ -11,17 +11,13 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
-import org.barisakkurt.istanbulandroid.LoginActivity.LoginTask;
 import org.barisakkurt.istanbulweb.utilty.Utility;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.app.Activity;
-import android.content.Intent;
-import android.util.Log;
-import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -36,14 +32,14 @@ public class RegisterActivity extends BaseActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_register);
-	}
-
-	public void registerUser(View v) {
+		
 		editTextNameSurname = (EditText) findViewById(R.id.editTextNameSurname);
 		editTextEmail = (EditText) findViewById(R.id.editTextEmail);
 		editTextPassword = (EditText) findViewById(R.id.editTextPassword);
 		editTextPasswordAgain = (EditText) findViewById(R.id.editTextPasswordAgain);
-		
+	}
+
+	public void registerUser(View v) {
 		String strNameSurname="";
 		String strEmail="";
 		String strPassword="";
@@ -64,6 +60,13 @@ public class RegisterActivity extends BaseActivity {
 					"E-posta ve þifreniz kriterleri karþýlamýyor.",
 					Toast.LENGTH_SHORT).show();
 		}
+	}
+	
+	public void clear(View v) {
+		editTextNameSurname.setText("");
+		editTextEmail.setText("");
+		editTextPassword.setText("");
+		editTextPasswordAgain.setText("");
 	}
 
 	class RegisterTask extends AsyncTask<String, String, String> {

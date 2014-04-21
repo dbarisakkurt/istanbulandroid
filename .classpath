@@ -8,5 +8,6 @@
 	<classpathentry kind="lib" path="C:/Users/baris/android-workspace/IstanbulAndroid/libs/apache-mime4j-0.6.1.jar"/>
 	<classpathentry kind="lib" path="C:/Users/baris/android-workspace/IstanbulAndroid/libs/httpcore-4.3.jar"/>
 	<classpathentry kind="lib" path="C:/Users/baris/android-workspace/IstanbulAndroid/libs/httpmime-4.3.1.jar"/>
+	<classpathentry kind="lib" path="libs/android-query-full.0.26.7.jar"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>

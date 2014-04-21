@@ -31,6 +31,7 @@ import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.ActionBarActivity;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
 import android.util.Log;
@@ -41,6 +42,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.androidquery.AQuery;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.GoogleMap.InfoWindowAdapter;
 import com.google.android.gms.maps.GoogleMap.OnInfoWindowClickListener;
@@ -48,6 +50,10 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBar.Tab;
+import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 
 public class MapFragment extends Fragment {
 	JSONArray problems = null;
@@ -101,8 +107,7 @@ public class MapFragment extends Fragment {
 	 * */
 	private void initilizeMap() {
 		if (googleMap == null) {
-			googleMap = ((SupportMapFragment) getFragmentManager()
-					.findFragmentById(R.id.map)).getMap();
+			googleMap = ((SupportMapFragment) getFragmentManager().findFragmentById(R.id.map)).getMap();
 
 			// check if map is created successfully or not
 			if (googleMap == null) {
@@ -208,7 +213,6 @@ public class MapFragment extends Fragment {
 	}
 
 	private void addMarkersToMap() {
-
 		for (int i = 0; i < probList.size(); i++) {
 			if (!this.problemSet.contains(probList.get(i))) {
 				this.problemSet.add(probList.get(i));
@@ -218,7 +222,8 @@ public class MapFragment extends Fragment {
 				String title = probList.get(i).getCategory();
 				
 				String body=probList.get(i).getProblemId()+";;";
-				body += probList.get(i).getDescription();
+				body += probList.get(i).getDescription()+";;";
+				body+=probList.get(i).getImagePath();
 
 				googleMap.setInfoWindowAdapter(new InfoWindowAdapter() {
 					private final View contents = getActivity().getLayoutInflater().inflate(
@@ -237,15 +242,25 @@ public class MapFragment extends Fragment {
 						//EventInfo eventInfo = eventMarkerMap.get(marker);
 						String title = marker.getTitle();
 						String body=marker.getSnippet();
+						//String imagePath=marker.get
 						//String markerId=marker.get
-
+						
 						String[] bodyTextArray=body.split("(;;)");
 						String bodyText="";
 						String idText="";
-						if(bodyTextArray.length==2) {
-							bodyText=bodyTextArray[1];
+						String imagePath="";
+						if(bodyTextArray.length==3) {
 							idText=bodyTextArray[0];
+							bodyText=bodyTextArray[1];
+							imagePath=bodyTextArray[2];
 						}
+						
+						
+						//ImageView imgView=(ImageView) contents.findViewById(R.id.ivInfoWindowMain);
+						AQuery aquery = new AQuery(getActivity(), contents);
+						Log.d("RESIM-map",Utility.webSiteAddress + imagePath);
+			            aquery.id(R.id.ivInfoWindowMain).image(Utility.webSiteAddress +imagePath, true, true, 0, 0, null, AQuery.FADE_IN_NETWORK, 1.0f).visible();
+						
 						
 						TextView txtTitle = ((TextView) contents
 								.findViewById(R.id.txtInfoWindowTitle));
@@ -264,7 +279,6 @@ public class MapFragment extends Fragment {
 						TextView txtType = ((TextView) contents
 								.findViewById(R.id.txtInfoWindowEventType));
 						txtType.setText(bodyText);
-						
 						//txtType.setText(eventInfo.getType());
 						return contents;
 					}
@@ -284,9 +298,12 @@ public class MapFragment extends Fragment {
 			            	String[] bodyTextArray=allText.split("(;;)");
 							String bodyText="";
 							String idText="";
-							if(bodyTextArray.length==2) {
-								bodyText=bodyTextArray[1];
+							String imagePath="";
+							if(bodyTextArray.length==3) {
 								idText=bodyTextArray[0];
+								bodyText=bodyTextArray[1];
+								imagePath=bodyTextArray[2];
+								
 							}
 							
 							Problem problemPass=null;
@@ -306,7 +323,7 @@ public class MapFragment extends Fragment {
 								i.putExtra("category", problemPass.getCategory());
 								i.putExtra("latitude", problemPass.getLatitude());
 								i.putExtra("longitude", problemPass.getLongitude());
-								i.putExtra("imagePath", problemPass.getLongitude());
+								i.putExtra("imagePath", problemPass.getImagePath());
 								startActivity(i);
 
 							}
