@@ -87,20 +87,6 @@ public class ProblemsActivity extends ActionBarActivity  implements
 			}
 		}
 	}
-/*
-	@Override
-	public void onTabReselected(Tab tab, FragmentTransaction ft) {
-	}
-
-	@Override
-	public void onTabSelected(Tab tab, FragmentTransaction ft) {
-		// on tab selected show respected fragment view
-		viewPager.setCurrentItem(tab.getPosition());
-	}
-
-	@Override
-	public void onTabUnselected(Tab tab, FragmentTransaction ft) {
-	}*/
 
 	public void closeApp(View v) {
 		finish();
@@ -119,7 +105,7 @@ public class ProblemsActivity extends ActionBarActivity  implements
 
 	}
 
-	public void showNearestProblems(View v) {
+	public void refreshPage(View v) {
 		android.support.v4.app.FragmentManager fragmentManager = this
 				.getSupportFragmentManager();
 		List<android.support.v4.app.Fragment> fragments = fragmentManager

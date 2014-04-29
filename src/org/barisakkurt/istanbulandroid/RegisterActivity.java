@@ -50,6 +50,7 @@ public class RegisterActivity extends BaseActivity {
 		strPassword = editTextPassword.getText().toString();
 		strPasswordAgain = editTextPasswordAgain.getText().toString();
 
+		if(isOnline()) {
 		if (strPassword.equals(strPasswordAgain)
 				&& Utility.isTextInRange(strPassword)
 				&& Utility.validateEmail(strEmail)) {
@@ -57,7 +58,13 @@ public class RegisterActivity extends BaseActivity {
 			new RegisterTask().execute(params);
 		} else {
 			Toast.makeText(getApplicationContext(),
-					"E-posta ve þifreniz kriterleri karþýlamýyor.",
+					getString(R.string.username_password),
+					Toast.LENGTH_SHORT).show();
+		}
+		}
+		else {
+			Toast.makeText(getApplicationContext(),
+					getString(R.string.internet_connection_required),
 					Toast.LENGTH_SHORT).show();
 		}
 	}

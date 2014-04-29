@@ -16,7 +16,7 @@ import android.os.Environment;
 
 @SuppressLint("NewApi")
 public class Utility extends Activity {
-	public static final String webSiteAddress = "http://188.226.204.205/istanbulweb/";
+	public static final String webSiteAddress ="http://192.168.1.3/istanbulweb/"; //"http://188.226.204.205/istanbulweb/";
 	public static final String emailAddress = "dbarisakkurt@gmail.com";
 	@SuppressLint("NewApi")
 	public static final String imageFolder = Environment

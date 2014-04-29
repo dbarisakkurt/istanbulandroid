@@ -9,6 +9,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class ContactActivity extends BaseActivity {
 	Button buttonSend;
@@ -49,8 +50,10 @@ public class ContactActivity extends BaseActivity {
  
 			  //need this to prompts email client only
 			  email.setType("message/rfc822");
- 
-			  startActivity(Intent.createChooser(email, getString(R.string.select_email_client)));
+			  if(isOnline())
+				  startActivity(Intent.createChooser(email, getString(R.string.select_email_client)));
+			  else
+				  Toast.makeText(getApplicationContext(), getString(R.string.internet_connection_required), Toast.LENGTH_SHORT).show();
  
 			}
 		});

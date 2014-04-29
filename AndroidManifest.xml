@@ -62,7 +62,8 @@
         </activity>
         <activity
             android:name="org.barisakkurt.istanbulandroid.SingleListActivity"
-            android:label="@string/title_activity_single_list" >
+            android:label="@string/title_activity_single_list"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="org.barisakkurt.istanbulandroid.SplashActivity"

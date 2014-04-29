@@ -62,7 +62,7 @@ public class LoginActivity extends BaseActivity {
 
 		if (!isOnline()) {
 			Toast.makeText(getApplicationContext(),
-					"Please ensure that you are online.", Toast.LENGTH_SHORT)
+					getString(R.string.internet_connection_required), Toast.LENGTH_SHORT)
 					.show();
 		} else if (Utility.isTextInRange(password)
 				&& Utility.validateEmail(username)) {

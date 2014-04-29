@@ -9,6 +9,49 @@
       android:layout_width="fill_parent"
       android:layout_height="fill_parent" 
       android:layout_weight="1"/>
+    
+    
+        <LinearLayout
+        android:id="@+id/linearLayout1"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_weight="1"
+        android:gravity="bottom"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/buttonSendNewProblem"
+            style="@style/ButtonText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:layout_weight="1"
+            android:background="@drawable/blue"
+            android:onClick="sendNewProblem"
+            android:text="@string/newReport" />
+
+        <Button
+            android:id="@+id/buttonShowNearestProblems"
+            style="@style/ButtonText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/red"
+            android:onClick="refreshPage"
+            android:text="@string/refresh" />
+
+        <Button
+            android:id="@+id/closeButton"
+            style="@style/ButtonText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/green"
+            android:onClick="closeApp"
+            android:text="@string/back" />
+    </LinearLayout>
      
  
 </RelativeLayout>

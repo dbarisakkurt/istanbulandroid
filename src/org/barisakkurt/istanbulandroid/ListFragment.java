@@ -22,6 +22,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -41,12 +42,26 @@ public class ListFragment extends Fragment {
 	private static final String TAG_REPORTDATE = "reportdate";
 	private static final String TAG_CATEGORY = "category";
 	public List<Problem> probList = new ArrayList<Problem>();
+	Button left, right, middle;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 
 		View rootView = inflater.inflate(R.layout.list_tab, container, false);
+		
+		boolean showBut = ((ProblemsActivity) this.getActivity()).showButtons;
+		
+		left = (Button) rootView.findViewById(R.id.buttonSendNewProblem);
+		middle = (Button) rootView.findViewById(R.id.buttonShowNearestProblems);
+		right = (Button) rootView.findViewById(R.id.closeButton);
+
+		if (showBut == false) {
+			left.setVisibility(View.INVISIBLE);
+			middle.setVisibility(View.INVISIBLE);
+			right.setVisibility(View.INVISIBLE);
+		}
+		
 		new LoadAllProducts2(this).execute();
 
 		return rootView;
@@ -70,8 +85,6 @@ public class ListFragment extends Fragment {
 
 	}
 
-	// //////////////////////////////////
-	// /////////////////////////////////////////////////////////////////////////
 	// Background Async Task to Load all product by making HTTP Request
 	class LoadAllProducts2 extends AsyncTask<String, String, String> {
 		public List<Problem> pList = new ArrayList<Problem>();
@@ -81,16 +94,9 @@ public class ListFragment extends Fragment {
 			this.activity = activity;
 		}
 
-		// Before starting background thread Show Progress Dialog
 		@Override
 		protected void onPreExecute() {
 			super.onPreExecute();
-			/*
-			 * pDialog = new ProgressDialog(getActivity());
-			 * pDialog.setMessage("Problemler yükleniyor, lüten bekleyiniz...");
-			 * pDialog.setIndeterminate(false); pDialog.setCancelable(false);
-			 * pDialog.show();
-			 */
 		}
 
 		// getting All products from url
@@ -112,29 +118,29 @@ public class ListFragment extends Fragment {
 					problems = json.getJSONArray("problems");
 					Log.d("BARIS", Integer.toString(problems.length()));
 
+					
 					// looping through All Products
 					for (int i = 0; i < problems.length(); i++) {
 						JSONObject c = problems.getJSONObject(i);
 
-						Log.d("RESIM", "c=" + c.toString());
-						// Storing each json item in variable
-
 						String latitude = c.getString(TAG_LATITUDE);
-						Log.d("LATTTTTTTTTTTTTT=", "" + latitude);
 						String longitude = c.getString(TAG_LONGITUDE);
 						String photo = c.getString(TAG_PHOTO);
 						String description = c.getString(TAG_DESCRIPTION);
 						String reportDate = c.getString(TAG_REPORTDATE);
 						String category = c.getString(TAG_CATEGORY);
 
-						Problem tempProblem = new Problem(latitude, longitude,
-								reportDate);
+						Problem tempProblem=new Problem();
+						tempProblem.setLatitude(latitude);
+						tempProblem.setLongitude(longitude);
+						tempProblem.setReportDate(reportDate);
 						tempProblem.setCategory(category);
 						tempProblem.setDescription(description);
 						tempProblem.setImagePath(photo);
 
 						// tempProblem.setImagePath(photo);
 						pList.add(tempProblem);
+						tempProblem=null;
 					}
 				} else {
 					// no products found Launch Add New product Activity
@@ -149,8 +155,7 @@ public class ListFragment extends Fragment {
 		// After completing background task Dismiss the progress dialog
 		protected void onPostExecute(String file_url) {
 			activity.probList = pList;
-			// dismiss the dialog after getting all products
-			// pDialog.dismiss();
+
 
 			ProblemAdapter probAdapter = new ProblemAdapter(getActivity(),
 					android.R.layout.list_content, probList);
@@ -230,12 +235,7 @@ class ProblemAdapter extends ArrayAdapter<Problem> {
 					.substring(0, 40) + "...");
 		else
 			holder.description.setText(rowItem.getDescription());
-		// holder.reportDate.setText(rowItem.getReportDate());
 
 		return convertView;
-	
-
 	}
-	
-	
 }

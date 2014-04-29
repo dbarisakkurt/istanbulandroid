@@ -51,13 +51,10 @@ import android.widget.Toast;
 public class NewReportActivity extends BaseActivity {
 	//1888 is arbitrary see here http://stackoverflow.com/questions/16775427/android-camera-intent-not-working-launching-gallery-instead
 	private static final int CAMERA_REQUEST = 1888;
-	private ImageView imageView;
 	String filePath = Utility.imageFolder;
 	String userId;
 	EditText edtAddress, edtDescription;
 	String timeStamp;
-	private static final int CAMERA_CAPTURE_IMAGE_REQUEST_CODE = 100;
-	private static final int CAMERA_CAPTURE_VIDEO_REQUEST_CODE = 200;
 	public static final int MEDIA_TYPE_IMAGE = 1;
 	public static final int MEDIA_TYPE_VIDEO = 2;
 	Button buttonSubmit;
@@ -261,7 +258,6 @@ public class NewReportActivity extends BaseActivity {
 			String image_str = Base64.encodeToString(byte_arr, Base64.DEFAULT);
 			ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
 
-			Date now = new Date();
 			DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 
 			// Get the date today using Calendar object.

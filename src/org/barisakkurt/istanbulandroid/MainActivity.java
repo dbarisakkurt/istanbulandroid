@@ -1,23 +1,23 @@
 package org.barisakkurt.istanbulandroid;
 
+import org.barisakkurt.istanbulweb.utilty.Utility;
+
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
 
-//TODO düzelttiklerim
-//TODO MainActivity, LoginActivity, RegisterActivity, AboutActivity, ContactActivity, BaseActivty
-//TODO SetingsActivity düzelmez.
 //TODO resimleri haritada göster
 //TODO cep telefonunda problems activity açýlmýyor.
 //TODO farklý birkaç telefonda test et.
-//TODO register a isonline mi kontrolü ekle.
-//TODO sorun detail activity sadece portait olsun ve scrollview ekle, resmi ortala.
-//TODO map fragmenti yükleyemiyor.
+//TODO map fragmenti yükleyemiyor telefonda
 //TODO resim çekince kameradan resim gelmiyor gibi biþe var.
-//TODO sorun istanbul baþlýðýný ortala
-//TODO show all problemse is online mi kontrolü ekle
+//TODO yenile butonu tam çalýþmýyor.
+//TODO yeni bir þey ekleyince liste güncellenmiyor.
+//TODO kategori null geliyor.---
+//TODO uygulama yavaþ çalýþýyor.
 
 //TODO verilen oylarý göster
 //TODO alýnan oya göre sýralama
@@ -25,6 +25,10 @@ import android.widget.Toast;
 //TODO dosyalarý servera kaydederken isimere kullanici adlarini da ekle.
 //TODO user, citizenuser gibi kullanýcý ile ilgili sýnýflarý ekle
 //TODO sadece kendi eklediðin sorunlarý göster
+//TODO açýlýþta internete baðlý mý diyalogu açtýr.
+//TODO google+ ile login yapma.
+//TODO yardýmcý araçlar bölümü ->hangi sokaktayým vs. gibi.
+//TODO resim kaydetmeye kullanici adýný da ekle.
 
 public class MainActivity extends BaseActivity {
 
@@ -32,6 +36,8 @@ public class MainActivity extends BaseActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		
+		Log.d("DIZIN", "DIZIN:"+Utility.imageFolder);
 	}
 	
 	public void openLoginActivity(View v) {
@@ -50,8 +56,13 @@ public class MainActivity extends BaseActivity {
 	}
 	
 	public void openAllProblems(View v) {
-		Intent myIntent = new Intent(MainActivity.this, ProblemsActivity.class);
-		myIntent.putExtra("showButons", false);
-    	MainActivity.this.startActivity(myIntent);
+		if(isOnline()) {
+			Intent myIntent = new Intent(MainActivity.this, ProblemsActivity.class);
+			myIntent.putExtra("showButons", false);
+	    	MainActivity.this.startActivity(myIntent);
+		}
+		else {
+			Toast.makeText(getApplicationContext(), getString(R.string.internet_connection_required), Toast.LENGTH_SHORT).show();
+		}
 	}
 }

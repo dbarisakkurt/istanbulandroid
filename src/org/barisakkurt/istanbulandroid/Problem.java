@@ -9,26 +9,14 @@ class Problem {
 	private String description;
 	private String imagePath;
 	
-	public boolean equals(Object o)
-	{
-		Problem p = (Problem) o;
-		//return this.latitude.equals(p.latitude) && this.longitude.equals(p.longitude) && this.reportDate.equals(p.reportDate) && this.description.equals(p.description);
-		return this.imagePath.equals(p.imagePath);
+	public Problem() {
 	}
 	
-	public int hashCode()
-	{
-		return this.imagePath.hashCode();
+	public Problem(String pId) {
+		super();
+		this.problemId=pId;
 	}
 	
-	public String getImagePath() {
-		return imagePath;
-	}
-
-	public void setImagePath(String imagePath) {
-		this.imagePath = imagePath;
-	}
-
 	public Problem(String latitude, String longitude, String reportDate) {
 		super();
 		this.latitude = latitude;
@@ -36,14 +24,38 @@ class Problem {
 		this.reportDate = reportDate;
 	}
 	
+	public Problem(String problemId, String desc, String imgPath, String latitude, String longitude, String reportDate) {
+		super();
+		this.problemId=problemId;
+		this.description=desc;
+		this.imagePath=imgPath;
+		this.latitude = latitude;
+		this.longitude = longitude;
+		this.reportDate = reportDate;
+	}
+	
+	public boolean equals(Object o) {
+		if(o==null)
+			return false;
+		if(o==this)
+			return true;
+		if (!(o instanceof Problem))
+            return false;
+		Problem p = (Problem) o;
+		return this.problemId.equals(p.problemId);
+	}
+	
+	public int hashCode() {
+		return this.problemId.hashCode();
+	}
+	
+	
 	public String getProblemId() {
 		return problemId;
 	}
-
 	public void setProblemId(String problemId) {
 		this.problemId = problemId;
 	}
-	
 	public String getLatitude() {
 		return latitude;
 	}
@@ -74,7 +86,10 @@ class Problem {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
-	
-	
+	public String getImagePath() {
+		return imagePath;
+	}
+	public void setImagePath(String imagePath) {
+		this.imagePath = imagePath;
+	}
 }

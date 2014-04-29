@@ -5,7 +5,6 @@ import org.barisakkurt.istanbulweb.utilty.Utility;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.androidquery.AQuery;
@@ -22,7 +21,7 @@ public class SingleListActivity extends BaseActivity {
         TextView txtReportDate = (TextView) findViewById(R.id.reportDate);
         TextView txtLatitude = (TextView) findViewById(R.id.latitude);
         TextView txtLongitude = (TextView) findViewById(R.id.longitude);
-        ImageView imgView = (ImageView) findViewById(R.id.imageViewReport);
+        //ImageView imgView = (ImageView) findViewById(R.id.imageViewReport);
          
         Intent i = getIntent();
         String description= i.getStringExtra("description");
@@ -33,10 +32,7 @@ public class SingleListActivity extends BaseActivity {
         String imagePath=i.getStringExtra("imagePath");
         
         AQuery aq = new AQuery(this);
-        
         Log.d("RESIM-singlelist",Utility.webSiteAddress + imagePath);
-        
-        
         aq.id(R.id.imageViewReport).image(Utility.webSiteAddress + imagePath, true, true, 0, 0, null, AQuery.FADE_IN_NETWORK, 1.0f);
 
         txtCategory.setText(category);
